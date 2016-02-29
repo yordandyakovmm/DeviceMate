@@ -1,0 +1,113 @@
+@import "_Global.scss";
+.filters-wrapper {
+  float: left;
+  z-index: 60;
+  position: fixed;
+  width: 270px;
+  background-color: $COLOR_BODY_BACKGROUND;
+  top: 75px;
+
+  .all-filters-header {
+    position: relative;
+    min-height: 61px;
+    line-height: 61px;
+    height: 61px;
+    overflow: hidden;
+    border-bottom: 1px solid $COLOR_BORDERS;
+
+    .tab {
+      float: left;
+      width: 50%;
+      text-align: center;
+      cursor: pointer;
+      color: $COLOR_LINK;
+
+      .dm-glyph {
+        font-size: 22px;
+      }
+      &:hover {
+        background-color: darken($COLOR_BODY_BACKGROUND, 5);
+      }
+      &.selected {
+        color: #fff;
+        background-color: $COLOR_LINK;
+      }
+      &.selected.tab-accessories {
+        background-color: $COLOR_TAB_SELECTED;
+      }
+    }
+  }
+  .filter {
+    // display: block is added to overwrite a bootstrap rule
+    display: block;
+    border-bottom: 1px solid $COLOR_BORDERS;
+    height: 45px;
+    line-height: 42px;
+
+    &.disabled {
+      color: #ccc;
+      .filter-header {
+        color: #ccc;
+      }
+    }
+    &.open {
+      .filter-header {
+        background-color: #fff;
+      }
+    }
+    .filter-header-label {
+      float: left;
+      padding-left: 15px;
+      width: 50%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .filter-header {
+      float: right;
+      position: relative;
+      width: 50%;
+      background-color: $COLOR_BODY_BACKGROUND;
+      border: none;
+      outline: none;
+      color: $COLOR_LINK;
+      text-align: right;
+      // overwrite bootstrap
+      @include ps-box-shadow(none);
+    }
+    .filter-content {
+      background-color: #fff;
+      margin: 0px;
+      padding: 0px;
+      width: 100%;
+      max-height: 270px;
+      overflow-y: auto;
+      // overwrite bootstrap
+      border: none;
+      border-radius: 0px;
+      li {
+        padding-left: 15px;
+        height: 45px;
+        list-style: none;
+        cursor: pointer;
+        line-height: 45px;
+        color: $COLOR_LINK;
+        &:hover {
+          @include ps-box-shadow(0 0 5px #888);
+        }
+      }
+    }
+  }
+  .clear-filters {
+    height: 45px;
+    color: $COLOR_NOTAVAILABLE;
+    text-align: center;
+    line-height: 45px;
+
+    span {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

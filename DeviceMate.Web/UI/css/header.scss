@@ -1,0 +1,290 @@
+@import "_Global.scss";
+
+// base rules for the header components
+.nav-wrapper {
+  // position: relative;
+  // margin: 15px;
+  // .nav-btn{
+  //     height: 45px;
+  //     background-color: $COLOR_HEADER_BACKGROUND;
+  //     border: none;
+  //     outline: none;
+  //     &:hover {
+  //         color: $COLOR_HEADER_ONHOVER;
+  //     }
+  // }
+}
+.nav-btn-icon {
+  position: absolute;
+  content: '';
+  top: 0px;
+  left: 0px;
+  height: 45px;
+  width: 45px;
+}
+.nav-btn-arrow {
+  position: absolute;
+  content: '';
+  width: 15px;
+  height: 15px;
+  top: 15px;
+  right: 0px;
+  background-image: url('/UI/images/icon-15-down-white.png');
+}
+.nav-list {
+  position: absolute;
+  width: 200px;
+  ul {
+    background-color: $COLOR_HEADER_BACKGROUND;
+    margin: 15px 0px 0px 0px;
+    padding: 0px;
+
+    li {
+      border-top: 1px solid #fff;
+      height: 45px;
+      list-style: none;
+      cursor: pointer;
+      line-height: 45px;
+    }
+  }
+}
+// styles for the header components
+.header {
+  top: 0px;
+  left: 0px;
+  height: 75px;
+  position: fixed;
+  width: 100%;
+  background-color: $COLOR_HEADER_BACKGROUND;
+  color: #fff;
+  z-index: 500;
+
+  .logo-wrapper {
+    margin: 15px 90px 15px 15px;
+    float: left;
+  }
+  .user-nav-wrapper {
+    position: relative;
+    float: right;
+    margin: 14px 14px 0 0;
+    cursor: pointer;
+
+    .nav-btn {
+      height: 45px;
+      // background-color: $COLOR_HEADER_BACKGROUND;
+      border: none;
+      outline: none;
+      .user-info {
+        float: left;
+        margin: 4px 15px 0 0;
+        .location {
+          font-size: 12px;
+          text-align: right;
+          color: #ccc;
+        }
+      }
+      .profile-picture {
+        position: relative;
+        float: left;
+        margin-right: 23px;
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        background: url('/UI/images/icon-45-avatar.png') no-repeat 0 1px;
+        overflow: hidden;
+        @include ps-border-radius(24px);
+        .profile-pic-positioner {
+          width: 100px;
+          position: absolute;
+          height: 100px;
+          left: -26px;
+
+          img {
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 50px;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            max-width: 100px;
+            display: block;
+          }
+        }
+      }
+      &:after {
+        @extend .nav-btn-arrow;
+      }
+      &:hover {
+        color: #fff;
+      }
+    }
+    .user-nav {
+      display: none;
+      position: absolute;
+      right: 0px;
+      ul {
+        margin: 0;
+        padding: 4px 0;
+        min-width: 160px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, .15);
+        overflow: hidden;
+        @include ps-border-radius(4px);
+        @include ps-box-shadow(0 6px 12px rgba(0, 0, 0, .175));
+        li {
+          border-top: 1px solid #fff;
+          padding: 3px 20px;
+          list-style: none;
+          cursor: pointer;
+          text-align: right;
+          color: #000;
+          &:hover {
+            background-color: #f5f5f5;
+          }
+          a {
+            color: #000;
+            text-decoration: none;
+          }
+        }
+        li:hover {
+          background-color: #fbac43;
+          a {
+            color: #fff;
+          }
+        }
+      }
+    }
+    // .user-nav-wrapper
+    &.open {
+      .user-nav {
+        display: block;
+      }
+    }
+  }
+  .user-nav-wrapper:hover {
+    .user-nav {
+      display: block;
+    }
+  }
+}
+.navigation {
+  float: left;
+  margin: 20px 0 0 14px;
+  .navi-holder {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      float: left;
+      margin-right: 35px;
+      a {
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      a:hover {
+        text-decoration: none;
+        background-color: #fbac43;
+      }
+      a:focus {
+        text-decoration: none;
+      }
+    }
+    li.nav-link {
+      padding-top: 6px;
+    }
+    li.nav-dropdown {
+      li {
+        margin-right: 0;
+        width: 100%;
+      }
+      li a {
+        color: #000;
+      }
+      li:hover {
+        background-color: #fbac43;
+        a {
+          color: #fff;
+        }
+      }
+      .btn-primary {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+    li.nav-link .nav-glyph {
+      position: relative;
+      top: -4px;
+    }
+    li.nav-dropdown .nav-glyph {
+      position: relative;
+      top: 2px;
+    }
+    li.nav-dropdown .btn-group.open,
+    li.nav-dropdown:hover {
+      .btn-primary {
+        background-color: #fbac43;
+        color: #fff;
+      }
+    }
+  }
+  // position: relative;
+  // margin: 15px;
+  // .nav-btn{
+  //     height: 45px;
+  //     background-color: $COLOR_HEADER_BACKGROUND;
+  //     border: none;
+  //     outline: none;
+  //     &:hover {
+  //         color: $COLOR_HEADER_ONHOVER;
+  //     }
+  // }
+  // .search-nav-wrapper{
+  //     // @extend .nav-wrapper;
+  //     float: left;
+  //     .nav-btn{
+  //         span{
+  //             margin-left: 45px;
+  //         }
+  //         &:before {
+  //             @extend .nav-btn-icon;
+  //             background: url('../images/search.png') no-repeat 45px 90px;
+  //             background-position: 0 0;
+  //         }
+  //         &:hover:before {
+  //             background-position: 0 -46px;
+  //         }
+  //     }
+  // }
+  // .manage-nav-wrapper{
+  //     // @extend .nav-wrapper;
+  //     float: left;
+  //     .nav-btn{
+  //         span{
+  //             margin-left: 45px;
+  //             margin-right: 20px;
+  //         }
+  //         &:before {
+  //             @extend .nav-btn-icon;
+  //             //background-image: url(../images/icon-45-search.png);
+  //         }
+  //         &:hover:before {
+  //             //background-image: url(../images/icon-45-search-orange.png);
+  //         }
+  //         &:after {
+  //             @extend .nav-btn-arrow;
+  //         }
+  //     }
+  //     .manage-nav{
+  //         @extend .nav-list;
+  //         ul {
+  //             li {
+  //                 padding-left: 15px;
+  //                 text-align: left;
+  //             }
+  //         }
+  //     }
+  // }
+}

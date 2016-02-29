@@ -1,0 +1,14 @@
+﻿<div id="successNotification" 
+    @if (ViewBag.showSuccessNotification == true)
+	{           
+        @:>@ViewBag.successNotification    
+    }
+    else
+    {
+            @:style="display: none">
+    }
+
+    @{
+        ViewBag.showSuccessNotification = false;
+    }
+</div>  

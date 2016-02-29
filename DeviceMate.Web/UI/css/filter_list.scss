@@ -1,0 +1,55 @@
+@import "_Global.scss";
+
+.filter-list {
+  list-style-type: none;
+  padding-left: 0;
+  overflow-y: auto;
+  max-height: 250px;
+
+  li {
+    color: $COLOR_LINK;
+    padding: 10px;
+    border-top: 1px solid $COLOR_BORDERS;
+    background: #fff;
+    line-height: 30px;
+    border-left: 2px solid transparent;
+
+    .dm-glyph,
+    .nav-glyph:before {
+      font-size: 22px;
+    }
+    .glyphicon {
+      width: 27px;
+      font-size: 0.8em;
+    }
+    span {
+      float: left;
+      display: inline-block;
+
+      &:first-child {
+        margin-right: 7px;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  li:last-child {
+    border-bottom: 1px solid $COLOR_BORDERS;
+  }
+  li.active {
+    background: #fef9f5;
+    border-left-color: $COLOR_TAB_SELECTED;
+    color: $COLOR_HEADER_ONHOVER;
+
+    span {
+      &:first-child {
+        display: inline-block;
+        border: 2px solid #FBAC42;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 26px;
+      }
+    }
+  }
+}

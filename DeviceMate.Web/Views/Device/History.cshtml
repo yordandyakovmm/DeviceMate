@@ -1,0 +1,89 @@
+﻿@model DeviceMate.Web.Models.DeviceHistoryModel 
+
+@{
+    ViewBag.Title = "Device History";
+}
+
+
+@section scripts {
+    @Scripts.Render("~/Scripts/Common/Lists.js")
+    @Scripts.Render("~/Scripts/Common/Grid.js")
+    @Scripts.Render("~/Scripts/Device/DeviceHistorySearch.js")
+    @Scripts.Render("~/Scripts/Employees/EmployeesPresenter.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+    @Scripts.Render("~/Scripts/jquery.multiselect.min.js")
+}
+
+@Html.Partial("_Navigation", @Model.UserName)
+
+<div class="container-fluid" id="main-part">
+    <div class="hero-unit">
+        @Html.Partial("_SuccessNotification")
+        <h2>Device history</h2>
+        <div class="well">
+            @using (Html.BeginForm("History", "Device", FormMethod.Post, new { enctype = "multipart/form-data", id = "formSearch" }))
+            {
+                @Html.HiddenFor(m => m.Pager.Page)
+                @Html.HiddenFor(m => m.Pager.PageSize)
+                @Html.HiddenFor(m => m.Sorter.Column)
+                @Html.HiddenFor(m => m.Sorter.Direction)
+                @Html.HiddenFor(m => m.Sorter.Expression)
+                @Html.HiddenFor(m => m.ColumnSelector.UserGridColumnsIdsSer)
+                <div class="row-fluid">
+                    <fieldset class="span3">
+                        <label>Device Number</label>
+                        @Html.TextBoxFor(m => m.SearchFilter.Number)
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Name</label>
+                        @Html.TextBoxFor(m => m.SearchFilter.Name)
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Holder name or email</label>
+                        @Html.TextBoxFor(m => m.SearchFilter.Email)
+                    </fieldset>
+                </div>    
+                    
+                <div class="row-fluid">                    
+                    <fieldset class="span3">
+                        <label>Team</label>
+                        @Html.DropDownListFor(m => m.SearchFilter.TeamId, Model.Teams, new { @size = 5 })
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label for="SearchFilter_TownID">Town</label>
+                        @Html.DropDownListFor(m => m.SearchFilter.TownID, Model.Towns)
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label for="SearchFilter_DeviceTypeID">Device Type</label>
+                        @Html.DropDownListFor(m => m.SearchFilter.DeviceTypeID, Model.DeviceTypes)
+                    </fieldset>
+                </div>
+                <div class="row-fluid">
+                    <fieldset class="span3">
+                        <label>OS Version</label>
+                        @Html.TextBoxFor(m => m.SearchFilter.OsVersion)
+                    </fieldset>
+                </div>
+                <div class="row-fluid">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSearch">Search</button>
+                        <button type="button" class="btn" id="btnClear">Clear filter</button>
+                    </div>
+                </div>               
+            }
+            </div>
+    </div>
+
+    @if (Model.DeviceHistories.Count() == 0)
+    {
+        @:No devices found.
+    }
+    else
+    {
+        <div id="deviceHistoryGrid">
+            @Html.Partial("_DeviceHistoryGrid", Model)
+        </div>
+    }
+    <h4>Total Devices Count: @Model.TotalNumberOfDevices</h4>
+</div>
+

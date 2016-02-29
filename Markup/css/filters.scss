@@ -1,0 +1,86 @@
+.filters-wrapper{
+    width: 270px;
+    background-color: $COLOR_BODY_BACKGROUND;
+    .all-filters-header{
+        position: relative;
+        height: 45px;
+        line-height: 45px;
+        border-bottom: 1px solid $COLOR_BORDERS;
+        .tab{
+            float: left;
+            width: 50%;
+            text-align: center;
+            cursor: pointer;
+            &.selected{
+                color: #fff;
+                background-color: $COLOR_LINK;
+            }
+        }
+    }
+    .filter{
+        border-bottom: 1px solid $COLOR_BORDERS;
+        .filter-header{
+            position: relative;
+            height: 45px;
+            width: 100%;
+            background-color: $COLOR_BODY_BACKGROUND;
+            border: none;
+            outline: none;
+            .filter-header-label{
+                float: left;
+                margin-left: 15px;
+            }
+            .filter-header-selected-item{
+                float: right;
+                color: $COLOR_LINK;
+                margin-right: 15px;
+            }
+            &:after {
+                position: absolute;
+                content:'';
+                top: 15px;
+                right: 0px;
+                height: 15px;
+                width: 15px;
+                //background-image: url(../images/icon-15-down-white.png);
+            }
+            &.disabled{
+                .filter-header-label{
+                    color: #ccc;
+                }
+                .filter-header-selected-item{
+                    color: #ccc;
+                }
+            }
+        }
+        .filter-content{
+            background-color: #fff;
+            ul{
+                margin: 0px;
+                padding-left: 0px;
+                li{
+                    padding-left: 15px;
+                    height: 45px;
+                    list-style: none;
+                    cursor: pointer;
+                    line-height: 45px;
+                    color: $COLOR_LINK;
+                    &:hover {
+                        @include ps-box-shadow(0 0 5px #888);
+                    }
+                }
+            }
+        }
+    }
+    .clear-filters{
+        height: 45px;
+        color: $COLOR_NOTAVAILABLE;
+        text-align: center;
+        line-height: 45px;
+        span{
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

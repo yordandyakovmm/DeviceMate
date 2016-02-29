@@ -1,0 +1,48 @@
+﻿@model DeviceMate.Web.Models.Sorter
+
+@if (Model == null || (Model.Expression == null && Model.Column != ViewBag.Column))
+{
+    @:style="background: url('@Url.Content("~/Content/images/sort_both.png")') center right no-repeat;"
+    return;
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.Expression))
+{
+    var columnsDirections = Model.Expression.Split(',');
+    var found = false;
+    foreach (var columnDirection in columnsDirections)
+    {
+        var columnDirectionAsArray = columnDirection.Split(' ');
+        var column = columnDirectionAsArray[0];
+        var direction = columnDirectionAsArray[1];
+        if (column != ViewBag.Column)
+        {
+            continue;
+        }
+        
+        if (direction.StartsWith("ASC"))
+        {
+            @:style="background: url('@Url.Content("~/Content/images/sort_asc.png")') center right no-repeat;"
+        }
+        else
+        {
+            @:style="background: url('@Url.Content("~/Content/images/sort_desc.png")') center right no-repeat;"
+        }
+        found = true;
+        return;
+    }
+    
+    @:style="background: url('@Url.Content("~/Content/images/sort_both.png")') center right no-repeat;"
+    return;
+}
+
+
+@switch (Model.Direction)
+{
+    case Sorter.SortDirection.Ascending:
+        @:style="background: url('@Url.Content("~/Content/images/sort_asc.png")') center right no-repeat;"
+        break;
+    case Sorter.SortDirection.Descending:
+        @:style="background: url('@Url.Content("~/Content/images/sort_desc.png")') center right no-repeat;"
+        break;
+}

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>     <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>     <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="" ng-app="DeviceMateApp">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/UI/css")
+
+
+</head>
+<body ng-controller="RootCtrl">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    @if (User.Identity.IsAuthenticated) {
+
+        <header class="header">
+            <div class="logo-wrapper">
+                <h1><a href="/"><span>DeviceMate</span></a></h1>
+            </div>
+
+            <div class="navigation">
+                <ul class="navi-holder">
+                    <li class="nav-link">
+                        <i class="icon-th-large nav-glyph"></i> <a class="dashboard" href="/">Dashboard</a>
+                    </li>
+
+                    <li class="nav-link">
+                        <i class="icon-users nav-glyph"></i> <a class="users" href="/Administrator">Users</a>
+
+                    </li>
+                    @if (Roles.IsUserInRole(DeviceMate.Core.Common.AdminUserRole)) {
+                        <li class="nav-link">
+                            <i class="icon-shareable nav-glyph"></i> <a class="teams" href="/team">Teams</a>
+                        </li>
+                          <li class="nav-dropdown">
+                              <span class="manage"></span>
+                              <i class="icon-cog nav-glyph"></i>
+
+                              <div class="btn-group {{class}}" dropdown is-open="isopen">
+                                <button type="button" class="btn btn-primary">Manage</button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+                                 <span class="caret"></span>
+                                 <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a ui-sref="editdevice">Add Device</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="accessory({accessoryId: null})">Add Accessory</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                              <!-- div devicemate-dropdown placeholder="Manage" data="root.manageDropdown"></div -->
+                         </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="user-nav-wrapper devicemate-user-nav">
+                <div class="nav-btn">
+                    <div class="user-info">
+                        <div class="email" ng-bind="root.me.Email"></div>
+                        <div class="location" ng-bind="root.me.Location.Name"> </div>
+                    </div>
+                    <div class="profile-picture">
+                        <div class="profile-pic-positioner">
+
+                            <img width="48" src="{{root.me.PictureUrl}}"  />
+                        </div>
+                    </div>
+                </div>
+                <nav class="user-nav">
+                    <ul>
+                        <li><a href="/Account/Logout">Log out</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    }
+
+    <div class="content-holder" ui-view></div>
+
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+
+
+
+</body>
+</html>

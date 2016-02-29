@@ -1,0 +1,47 @@
+<div class="filters-wrapper">
+  <div class="all-filters-header">
+    <div id="devices-tab" class="tab tab-devices selected" ui-sref="search.devices" ng-click="toggleFilterTab($event)">
+      <i class="dm-glyph dm-glyph-phone"></i>
+      <span class="label-text">Devices</span>
+    </div>
+    <div id="accessories-tab" class="tab tab-accessories" ui-sref="search.accessories" ng-click="toggleFilterTab($event)">
+      <i class="dm-glyph dm-glyph-accessories"></i>
+      <span class="label-text">Accessories</span>
+    </div>
+  </div>
+  <div id="devices-filters" class="tab-content">
+    <div class="filter btn-group {{filter.disabledClass}}" ng-repeat="filter in devicesFilters" dropdown>
+      <div class="filter-header-label">{{filter.label}}</div>
+      <button class="filter-header dropdown-toggle {{filter.disabledClass}}" dropdown-toggle>
+        {{filter.selectedValue}} <span class="caret"></span>
+      </button>
+      <ul id="{{filter.param}}" class="dropdown-menu filter-content" role="menu">
+        <li id="all" ng-click="selectDeviceFilter($event)">All</li>
+        <li ng-repeat="value in filter.values | orderBy:['Dimention','Size'] " id="{{value.Id}}" ng-click="selectDeviceFilter($event)">
+          {{value.Name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="accessories-filters" class="tab-content ng-hide">
+    <div class="filter btn-group" ng-repeat="filter in accessoriesFilters" dropdown>
+      <div class="filter-header-label">{{filter.label}}</div>
+      <button class="filter-header dropdown-toggle" dropdown-toggle>
+        {{filter.selectedValue}} <span class="caret"></span>
+      </button>
+      <ul id="{{filter.param}}" class="dropdown-menu filter-content" role="menu">
+        <li id="all" ng-click="selectAccessoryFilter($event)">All</li>
+        <li ng-repeat="value in filter.values  " id="{{value.Id}}" ng-click="selectAccessoryFilter($event)">
+          {{value.Name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="clear-filters" ng-click="clearFilters()">
+    <span>
+      Clear filters
+    </span>
+  </div>
+</div>
+
+<div class="content-wrapper" ui-view></div>

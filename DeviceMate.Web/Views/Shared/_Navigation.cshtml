@@ -1,0 +1,30 @@
+﻿<div class="navbar navbar-fixed-top" id="top-bar">
+    <div class="container-fluid" id="header-container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="pull-left"><a href="@Url.Action("Index", "Home")"><img style="height: 45px" src="@Url.Content("~/Content/images/logo-mm.png")" alt="MentorMate" /></a></div>
+        <ul class="nav" id="top-menu-navigation">
+            <li><a href="/" class="top-menu-icon"><img src="/Content/images/icon-45-home.png" /> Home</a></li>
+            <li><a href="/Device/Search" class="top-menu-icon"><img src="/Content/images/icon-45-search.png" /> Search device</a></li>
+            <li><a href="/Accessory/Search" class="top-menu-icon"><img src="/Content/images/icon-45-search.png" />Search accessory</a></li>
+            <li><a href="/Device/Submit" class="top-menu-icon"><img src="/Content/images/icon-45-submit.png" />Submit device</a></li>
+            <li><a href="/Accessory/Submit" class="top-menu-icon"><img src="/Content/images/icon-45-submit.png" />Submit accessory</a></li>
+            <li><a href="/Device/History" class="top-menu-icon"><img src="/Content/images/icon-45-search.png" /> Device history</a></li>
+        </ul>
+        <div class="dropdown pull-right">
+            <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                @Model
+                <img src="/Content/images/icon-45-avatar.png" />
+                <img src="/Content/images/icon-15-down-white.png" />
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">@Html.ActionLink("Log off", "Logout", "Account")</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.navbar -->

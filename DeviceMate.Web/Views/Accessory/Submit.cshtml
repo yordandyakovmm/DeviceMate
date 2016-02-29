@@ -1,0 +1,61 @@
+﻿@using DeviceMate.Web.Models;
+@using DeviceMate.Objects.Repositories
+@model HoldModel<AccessoryRepo>
+
+@{
+    ViewBag.Title = "Submit accessory";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@Html.Partial("_Navigation", Model.UserName)
+
+<div class="container-fluid" id="main-part">
+    <div class="hero-unit">
+        <h2>Submit accessory holding</h2>
+        <div class="well">
+            @using (Html.BeginForm("Submit", "Accessory", FormMethod.Post, new { enctype = "multipart/form-data", id = "formSubmit" }))
+            {
+                @Html.HiddenFor(m => m.Hold.Id)
+                <div class="row-fluid">
+                    <fieldset class="span12">
+                        <label>Accessory number</label>
+                        @Html.TextBoxFor(m => m.Hold.HoldedItemName)
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Hold.HoldedItemName)
+                            @Html.ValidationMessage("NameUniqueness")
+                        </span>
+                        <span class="help-block">
+                            Please enter ONLY the unique number typed on the accessory. If it is missing, please contact the system administrators.
+                        </span>
+                    </fieldset>
+
+                </div>
+                <div class="row-fluid">
+                    <fieldset class="span3">
+                        <label>Team</label>
+                        @Html.DropDownListFor(m => m.Hold.TeamId, Model.Teams, new { @size = 5 })
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Hold.TeamId)
+                        </span>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Town</label>
+                        @Html.DropDownListFor(m => m.Hold.TownId, Model.Towns)
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Hold.TownId)
+                        </span>
+                    </fieldset>
+                </div>
+                  
+                <div class="row-fluid">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                    </div>
+                </div>                  
+            }
+        </div>
+    </div>
+</div>

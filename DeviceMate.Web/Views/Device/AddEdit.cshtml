@@ -1,0 +1,326 @@
+﻿@using DeviceMate.Web.Models;
+@model DeviceModel
+
+@{
+    if (Model.Device.Id.HasValue)
+    {
+        ViewBag.Title = "Edit device";
+
+    }
+    else
+    {
+        ViewBag.Title = "Add device";
+    }
+}
+
+@*@Html.Partial("_Navigation", @Model.UserName)*@
+
+
+<div id="main-part">
+    @Html.Partial("_SuccessNotification")
+    <div class="hero-unit">
+        @if (Model.Device.Id.HasValue)
+        {
+            <div class="Add-edit-page-header">
+                <div class="AddEdit-head">
+                    <i class="dm-glyph-cog nav-glyph"></i>
+                    Manage
+                </div>
+                <span class="add-header">EDIT DEVICE</span>
+            </div>
+        }
+        else
+        {
+            <div class="Add-edit-page-header">
+                <div class="AddEdit-head">
+                    <i class="dm-glyph-cog nav-glyph"></i>
+                    Manage
+                </div>
+                <span class="add-header">ADD NEW DEVICE</span>
+            </div>
+        }
+
+        <div class="add-device-block">
+            @using (Html.BeginForm("AddEdit", "Device", FormMethod.Post, new { enctype = "multipart/form-data", id = "formDevice" }))
+            {
+                @Html.HiddenFor(m => m.Device.Id)
+                @Html.HiddenFor(m => m.Device.HoldId)
+
+                <div class="gray-bar">
+                    <div class="AddEdit-bar">
+                        <i class="icon-sitemap nav-glyph"></i>
+                        General
+                    </div>
+                    <fieldset class="span3">
+                        <span class="add-header2">GENERAL INFORMATION</span>
+                        <p class="add-header-tip">Name and device number</p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <span class="add-header2">ADDITIONAL INFORMATION</span>
+                        <p class="add-header-tip">type,color</p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <span class="add-header2">TOWN</span>
+                        <p class="add-header-tip"></p>
+                    </fieldset>
+
+                </div>
+                <div class="row nopadding">
+                    <fieldset class="span3">
+                        <label>Device Number</label>
+                        @Html.TextBoxFor(m => m.Device.Number, new { maxlength = 5 })
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.Number)
+                            @Html.ValidationMessage("NameUniqueness")
+                        </span>
+                        <label>Name</label>
+                        @Html.TextBoxFor(m => m.Device.Name, new { @class = "long" })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.Name)
+                        </p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Additional Info</label>
+
+                        @Html.TextBoxFor(m => m.Device.SerialNumber)
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.SerialNumber)
+                        </span>
+                        <label>Type</label>
+
+                        @Html.DropDownListFor(m => m.Device.DeviceTypeId, Model.DeviceTypes)
+
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.DeviceTypeId)
+                        </span>
+
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Town</label>
+                        <br>
+                        @Html.DropDownListFor(m => m.Device.TownId, Model.Towns, new { size = 5, data_url = @Url.Action("GetTowns", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.TownId)
+                        </p>
+                    </fieldset>
+                </div>
+                <div class="gray-bar">
+                    <div class="AddEdit-bar">
+                        <i class="dm-glyph-os nav-glyph"></i>
+                        OS
+                    </div>
+                    <fieldset class="span3">
+                        <i class="dm-glyph-arrowright nav-glyph"></i>
+                        <span class="add-header2">Operating System</span>
+                        <p class="add-header-tip">OS, OS Version</p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <i class="dm-glyph-arrowright nav-glyph"></i>
+                        <span class="add-header2">MANUFACTURER</span>
+                        <p class="add-header-tip">Device Manufacturer</p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <i class="dm-glyph-arrowright nav-glyph"></i>
+                        <span class="add-header2">MODEL</span>
+                        <p class="add-header-tip">Model,Color</p>
+                    </fieldset>
+                </div>
+                <div class="row nopadding">
+                    <fieldset class="span3">
+                        <label>OS</label>
+                        <button type="button" id="openOsPopup" class="btn add-remove-btn show-mask">Add</button>
+                        <button type="button" id="deleteOs" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteOs", "Device")">Delete</button><br />
+                        @Html.DropDownListFor(m => m.Device.OsId, Model.OS, new { @size = 5, @data_url = @Url.Action("GetOSs", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.OsId)
+                        </p>
+                        <label>OS Version</label>
+                        @Html.TextBoxFor(m => m.Device.OSVersion)
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.OSVersion)
+                        </span>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Manufacturer</label>
+                        <button type="button" id="openManufacturerPopup" class="btn add-remove-btn show-mask">Add</button>
+                        <button type="button" id="deleteManufacturer" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteManufacturer", "Device")">Delete</button><br />
+                        @Html.DropDownListFor(m => m.Device.ManufacturerId, Model.Manufacturers, new { @size = 5, @data_url = @Url.Action("GetManufacturers", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.ManufacturerId)
+                        </p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Model</label>
+                        <button type="button" id="openModelPopup" class="btn add-remove-btn show-mask">Add Model</button>
+                        <button type="button" id="deleteModel" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteModel", "Device")">Delete Model</button><br />
+                        @Html.DropDownListFor(m => m.Device.ModelId, Model.Models, new { @size = 5, @data_url = @Url.Action("GetModels", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.ModelId)
+                        </p>
+                        <label>Color</label>
+                        <button type="button" id="openColorPopup" class="btn add-remove-btn show-mask">Add Color</button>
+                        <button type="button" id="deleteColor" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteColor", "Device")">Delete Color</button><br />
+                        @Html.DropDownListFor(m => m.Device.ColorId, Model.Colors, new { @size = 5, @data_url = @Url.Action("GetColors", "Device") })
+                    </fieldset>
+                </div>
+                <div class="gray-bar">
+                    <div class="AddEdit-bar">
+                        <i class="dm-glyph-resolution nav-glyph"></i>
+                        Resolution
+                    </div>
+                    <fieldset class="span3">
+                        <i class="dm-glyph-arrowright nav-glyph"></i>
+                        <span class="add-header2">SIZE (")</span>
+                        <p class="add-header-tip">Select Device screen size</p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <i class="dm-glyph-arrowright nav-glyph"></i>
+                        <span class="add-header2">WIDTH (px)</span>
+                        <p class="add-header-tip">Select Device screen width</p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <i class="dm-glyph-arrowright nav-glyph"></i>
+                        <span class="add-header2">HEIGHT(px)</span>
+                        <p class="add-header-tip">Select Device screen height</p>
+                    </fieldset>
+                </div>
+
+                <div class="row nopadding">
+                    <fieldset class="span3">
+                        <label>Size ('')</label>
+                        <button type="button" id="openScreenSizePopup" class="btn add-remove-btn show-mask">Add</button>
+                        <button type="button" id="deleteScreenSize" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteScreenSize", "Device")">Delete</button><br />
+                        @Html.DropDownListFor(m => m.Device.ScreenSizeId, Model.ScreenSizes, new { @size = 5, @data_url = @Url.Action("GetScreenSizes", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.ScreenSizeId)
+                        </p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Width (px)</label>
+                        <button type="button" id="openWidthPopup" class="btn add-remove-btn show-mask">Add</button>
+                        <button type="button" id="deleteWidth" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteWidth", "Device")">Delete</button><br />
+                        @Html.DropDownListFor(m => m.Device.ResolutionWidthId, Model.ResolutionWidths, new { @size = 5, @data_url = @Url.Action("GetWidths", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.ResolutionWidthId)
+                        </p>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Height (px)</label>
+                        <button type="button" id="openHeightPopup" class="btn add-remove-btn show-mask">Add</button>
+                        <button type="button" id="deleteHeight" class="btn add-remove-btn show-mask" data-url="@Url.Action("DeleteHeight", "Device")">Delete</button><br />
+                        @Html.DropDownListFor(m => m.Device.ResolutionHeightId, Model.ResolutionHeights, new { @size = 5, @data_url = @Url.Action("GetHeights", "Device") })
+                        <p class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Device.ResolutionHeightId)
+                        </p>
+                    </fieldset>
+                </div>
+                <div class="row nopadding">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div id="addColor" style="display: none;" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new Color</legend>
+            <label for="colorName">Name</label>
+            <input type="text" id="colorName" name="name" /><br />
+            <button type="button" id="addColor-button" class="btn btn-primary" data-url="@Url.Action("AddColor", "Device")">Save</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="addModel" style="display: none;" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new Model</legend>
+            <label id="newModelManufacturer"></label>
+            <label for="modelName">Model</label>
+            <input type="text" id="modelName" name="name" /><br />
+            <button type="button" id="addModel-button" class="btn btn-primary" data-url="@Url.Action("AddModel", "Device")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="addManufacturer" style="display: none;" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new Manufacturer</legend>
+            <label id="newManufacturerOS"></label>
+            <label for="manufacturerName">Manufacturer</label>
+            <input type="text" id="manufacturerName" name="name" /><br />
+            <button type="button" id="addManufacturer-button" class="btn btn-primary" data-url="@Url.Action("AddManufacturer", "Device")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="addOs" style="display: none;" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new OS</legend>
+            <label for="osName">OS</label>
+            <input type="text" id="osName" name="name" /><br />
+            <button type="button" id="addOs-button" class="btn btn-primary" data-url="@Url.Action("AddOs", "Device")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="addScreenSize" style="display: none" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new Screen Size</legend>
+            <label for="size">Size ('')</label>
+            <input type="text" id="size" name="size" />
+            <button type="button" id="addScreenSize-button" class="btn btn-primary" data-url="@Url.Action("AddScreenSize", "Device")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="addWidth" style="display: none" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new Width</legend>
+            <label for="width">Width (px)</label>
+            <input type="text" id="width" name="width" />
+            <button type="button" id="addWidth-button" class="btn btn-primary" data-url="@Url.Action("AddWidth", "Device")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="addHeight" style="display: none" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new Height</legend>
+            <label for="height">Height (px)</label>
+            <input type="text" id="height" name="height" />
+            <button type="button" id="addHeight-button" class="btn btn-primary" data-url="@Url.Action("AddHeight", "Device")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+<div id="errorPopup" style="display: none;" class="popup">
+    <p></p>
+    <span class="close">x</span>
+</div>
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Common/Select.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/UI/vendor")
+    @Scripts.Render("~/UI/js/app.js")
+    @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+    @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+    @Scripts.Render("~/UI/js/services/userModel.js")
+    @Scripts.Render("~/UI/js/services/RestSvc.js")
+    @Scripts.Render("~/UI/js/services/userSvc.js")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/Common/Lists.js")
+    @Scripts.Render("~/Scripts/Device/AddEdit.js")
+    @Scripts.Render("~/Scripts/Common/Select.js")
+
+}

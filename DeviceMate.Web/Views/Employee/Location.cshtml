@@ -1,0 +1,35 @@
+﻿@model DeviceMate.Web.Models.EmployeeLocationModel
+
+@{
+    ViewBag.Title = "Locate";
+}
+
+
+
+
+<div class="hero-unit">
+    @if (Model.IsLocationFound)
+    {
+        <div class="well" style="background-color: white">
+            <h1 style="margin-bottom: 20px">@Model.PremiseName</h1>
+            @Html.Raw(Model.LocationAsSvg)
+        </div>
+    }
+    else
+    {
+        <div class="alert-error" id="location-not-found-error">@Model.ErrorMessage</div>
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/UI/vendor")
+    @Scripts.Render("~/UI/js/app.js")
+    @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+    @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+    @Scripts.Render("~/UI/js/services/userModel.js")
+    @Scripts.Render("~/UI/js/services/RestSvc.js")
+    @Scripts.Render("~/UI/js/services/userSvc.js")
+
+
+}

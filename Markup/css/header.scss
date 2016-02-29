@@ -1,0 +1,155 @@
+@import "_Global.scss";
+
+// base rules for the header components
+.nav-wrapper{
+    position: relative;
+    margin: 15px;
+    .nav-btn{
+        height: 45px;
+        background-color: $COLOR_HEADER_BACKGROUND;
+        border: none;
+        outline: none;
+        &:hover {
+            color: $COLOR_HEADER_ONHOVER;
+        }
+    }
+}
+
+.nav-btn-icon {
+    position: absolute;
+    content:'';
+    top: 0px;
+    left: 0px;
+    height: 45px;
+    width: 45px;
+}
+.nav-btn-arrow {
+    position: absolute;
+    content:'';
+    width: 15px;
+    height: 15px;
+    top: 15px;
+    right: 0px;
+    background-image: url(../images/icon-15-down-white.png);
+}
+.nav-list{
+    position: absolute;
+    width: 200px;
+    ul {
+        background-color: $COLOR_HEADER_BACKGROUND;
+        margin: 15px 0px 0px 0px;
+        padding: 0px;
+        li {
+            border-top: 1px solid #fff;
+            height: 45px;
+            list-style: none;
+            cursor: pointer;
+            line-height: 45px;
+        }
+    }
+}
+
+// styles for the header components
+.header{
+    top: 0px;
+    left: 0px;
+    height: 75px;
+    position: fixed;
+    width:100%;
+    background-color: $COLOR_HEADER_BACKGROUND;
+    color: #fff;
+    z-index: 500;
+    .logo-wrapper{
+        margin: 15px 90px 15px 15px;
+        float: left;
+    }
+    .search-nav-wrapper{
+        @extend .nav-wrapper;
+        float: left;
+        .nav-btn{
+            span{
+                margin-left: 45px;
+            }
+            &:before {
+                @extend .nav-btn-icon;
+                background: url('../images/search.png') no-repeat 45px 90px;
+                background-position: 0 0;
+            }
+            &:hover:before {
+                background-position: 0 -46px;
+            }
+        }
+    }
+    .manage-nav-wrapper{
+        @extend .nav-wrapper;
+        float: left;
+        .nav-btn{
+            span{
+                margin-left: 45px;
+                margin-right: 20px;
+            }
+            &:before {
+                @extend .nav-btn-icon;
+                //background-image: url(../images/icon-45-search.png);
+            }
+            &:hover:before {
+                //background-image: url(../images/icon-45-search-orange.png);
+            }
+            &:after {
+                @extend .nav-btn-arrow;
+            }
+        }
+        .manage-nav{
+            @extend .nav-list;
+            ul {
+                li {
+                    padding-left: 15px;
+                    text-align: left;
+                }
+            }
+        }
+    }
+    .user-nav-wrapper{
+        @extend .nav-wrapper;
+        float: right;
+        margin: 14px 14px 0 0;
+
+        .nav-btn{
+            .user-info{
+                float: left;
+                margin: 4px 15px 0 0;
+                .location{
+                    font-size: 12px;
+                    text-align: right;
+                    color: #ccc;
+                }
+            }
+            .profile-picture{
+                float: left;
+                margin-right: 23px;
+                width: 48px;
+                height: 48px;
+                cursor: pointer;
+                background: url('../images/icon-45-avatar.png') no-repeat 0 1px;
+                overflow: hidden;
+                @include ps-border-radius(24px);
+            }
+            &:after {
+                @extend .nav-btn-arrow;
+            }
+            &:hover {
+                color: #fff;
+            }
+        }
+        .user-nav{
+            @extend .nav-list;
+            right: 0px;
+            ul {
+                li {
+                    padding-right: 15px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

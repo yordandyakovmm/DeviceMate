@@ -1,0 +1,62 @@
+﻿@model TeamModel
+@{
+    ViewBag.Title = "Teams";
+}
+
+@*@Html.Partial("_Navigation", Model.UserName)*@
+<p ng-show="!root.me.IsAdmin">You must be admin to access this page</p>
+<div ng-show="root.me.IsAdmin" class=" container admin-users-table-container" id="main-part">
+    @Html.Partial("_SuccessNotification")
+    @if (Model.Teams.Count() == 0)
+    {
+        @:No devices found.
+    }
+    else
+    {
+        
+        <table id="search-table" class="table table-striped table-bordered team-table"
+               data-employees-default-picture="@Url.Content("/Content/images/mentormate-logo.png")"
+               data-employees-extra-data-url="@Url.Action("Index", "Employee")">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var team in Model.Teams)
+                {
+                    <tr data-item-id="@team.Id">
+                        <td>@team.Name</td>
+                        <td>
+                            <a class="btn btn-custom" href="@Url.Action("AddOrEdit", "Team", new { Id = team.Id })">
+                                edit
+                            </a>
+                            <button data-url="@Url.Action("Delete", "Team", new { Id = team.Id})"
+                                    data-item-id="@team.Id" class="btn btn-default delete">
+                                delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <p>
+        <a type="submit" class="btn btn-custom" href="@Url.Action("AddOrEdit", "Team", null)">add new</a>
+    </p>
+    @section scripts {
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+        @Scripts.Render("~/bundles/UI/vendor")
+        @Scripts.Render("~/UI/js/app.js")
+        @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+        @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+        @Scripts.Render("~/UI/js/services/userModel.js")
+        @Scripts.Render("~/UI/js/services/RestSvc.js")
+        @Scripts.Render("~/UI/js/services/userSvc.js")
+        @Scripts.Render("~/Scripts/Common/Notifications.js")
+        @Scripts.Render("~/Scripts/Team/Index.js")
+
+    }

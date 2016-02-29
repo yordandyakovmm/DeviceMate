@@ -1,0 +1,29 @@
+{
+  "name": "MMDeviceMate",
+  "version": "0.1.0",
+  "authors": [
+    "MMTeam"
+  ],
+  "main": "js/app.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MM",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "angular-ui-router": "~0.2.18",
+    "moment": "~2.8.0",
+    "angular-moment": "~0.10.3",
+    "bootstrap": "~3.3.4",
+    "angular-ui-bootstrap": "~0.12.1",
+    "ng-dialog": "^0.5.8"
+  }
+}

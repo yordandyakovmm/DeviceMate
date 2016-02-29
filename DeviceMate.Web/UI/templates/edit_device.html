@@ -1,0 +1,402 @@
+<div id="main-part">
+  <div id="successNotification" ng-show="showSuccessNotification">
+    {{successNotification}}
+  </div>
+  <form ng-submit="saveDevice()" class="hero-unit">
+    <div class="Add-edit-page-header">
+      <div class="AddEdit-head">
+        <i class="dm-glyph-cog nav-glyph"></i> Manage
+      </div>
+      <span class="add-header">{{title}}</span>
+    </div>
+    <div class="add-device-block">
+      <div class="container-fluid gray-bar">
+        <div class="row">
+          <div class="AddEdit-bar">
+            <i class="icon-sitemap nav-glyph"></i> General
+          </div>
+
+          <div class="col-xs-3">
+            <span class="add-header2">GENERAL INFORMATION</span>
+            <p class="add-header-tip">Name and device number</p>
+          </div>
+          <div class="col-xs-3">
+            <span class="add-header2">ADDITIONAL INFORMATION</span>
+            <p class="add-header-tip">type,color</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nopadding">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-3">
+              <table class="table table-vertical-header">
+                <tr>
+                  <th class="text-right"><label>Device Number</label></th>
+                  <td><input type="text" required class="form-control input-sm flat-input" ng-model="device.DeviceNumber" ng-maxlength="5" /></td>
+                </tr>
+
+                <tr>
+                  <th class="text-right"><label>Name</label></th>
+                  <td><input type="text" required class="form-control input-sm flat-input" ng-model="device.Name" /></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="col-xs-3">
+              <table class="table table-vertical-header">
+                <tr>
+                  <th class="text-right"><label>Additional Info</label></th>
+                  <td><input type="text" required class="form-control input-sm flat-input" ng-model="device.Info" /></td>
+                </tr>
+
+                <tr>
+                  <th class="text-right"><label>Type</label></th>
+                  <td>
+                    <div class="dm-radio radio-inline" ng-repeat="item in filters.DeviceType">
+                      <input type="radio" required id="{{ item.Name + item.Id }}" name="deviceType" ng-value="item.Id" ng-model="device.Type.Id">
+                      <label for="{{ item.Name + item.Id }}">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                        {{ item.Name }}
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid gray-bar">
+        <div class="row">
+          <div class="AddEdit-bar">
+            <i class="dm-glyph-os nav-glyph"></i> OS
+          </div>
+
+          <div class="col-xs-3">
+            <i class="dm-glyph-arrowright nav-glyph"></i>
+            <span class="add-header2">Operating System</span>
+            <p class="add-header-tip">OS, OS Version</p>
+          </div>
+          <div class="col-xs-3">
+            <i class="dm-glyph-arrowright nav-glyph"></i>
+            <span class="add-header2">MANUFACTURER</span>
+            <p class="add-header-tip">Device Manufacturer</p>
+          </div>
+          <div class="col-xs-3">
+            <i class="dm-glyph-arrowright nav-glyph"></i>
+            <span class="add-header2">MODEL</span>
+            <p class="add-header-tip">Model,Color</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-3">
+            <div class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-os')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.Platform.Id" ng-click="deleteFilter(device.Platform, 'os')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </div>
+
+            <p>
+              <filter-list list-icon-class="dm-glyph-os nav-glyph" active-item="device.Platform" filter="filters.Platforms" on-filter-change="osChanged(item)"></filter-list>
+            </p>
+
+            <table class="table table-vertical-header">
+              <tr>
+                <th class="text-right"><label>OS Version</label></th>
+                <td><input type="text" class="form-control input-sm flat-input" ng-model="device.Platform.Version" /></td>
+              </tr>
+            </table>
+
+            <label>Color</label>
+            <div class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-color')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.Color.Id" ng-click="deleteFilter(device.Color, 'colors')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </div>
+
+            <filter-list list-icon-class="glyphicon glyphicon-tint" active-item="device.Color" filter="filters.Colors"></filter-list>
+          </div>
+
+          <div class="col-xs-3">
+            <div class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-manufacturer')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.Manufacturer.Id" ng-click="deleteFilter(device.Manufacturer, 'manufacturers')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </div>
+
+            <filter-list list-icon-class="dm-glyph-os nav-glyph" active-item="device.Manufacturer" filter="filters.Manufacturers" on-filter-change="manufacturerChanged(item)">
+              <em ng-show="!filters.Manufacturers.length">No filters to show. Select a different manufacturer/os</em>
+            </filter-list>
+          </div>
+
+          <div class="col-xs-3">
+            <div class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-model')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.Model.Id" ng-click="deleteFilter(device.Model, 'models')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </div>
+
+            <p>
+              <filter-list list-icon-class="dm-glyph-os nav-glyph" active-item="device.Model" filter="filters.Models">
+                <em ng-show="!filters.Models.length">No filters to show. Select a different manufacturer/os</em>
+              </filter-list>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid gray-bar">
+        <div class="row">
+          <div class="AddEdit-bar">
+            <i class="dm-glyph-resolution nav-glyph"></i> Resolution
+          </div>
+
+          <div class="col-xs-3">
+            <span class="add-header2">SIZE</span>
+            <p class="add-header-tip">Select Device screen size</p>
+          </div>
+
+          <div class="col-xs-3">
+            <span class="add-header2">WIDTH</span>
+            <p class="add-header-tip">Select Device screen width</p>
+          </div>
+
+          <div class="col-xs-3">
+            <span class="add-header2">HEIGHT</span>
+            <p class="add-header-tip">Select Device screen height</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-3">
+            <p class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-screen')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.ScreenSize.Id" ng-click="deleteFilter(device.ScreenSize, 'screensizes')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </p>
+
+            <filter-list list-icon-class="dm-glyph-resolution nav-glyph" active-item="device.ScreenSize" filter="filters.ScreenSize"></filter-list>
+          </div>
+
+          <div class="col-xs-3">
+            <p class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-width')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.Resolution.Width.Id" ng-click="deleteFilter(device.Resolution.Width, 'resolutionwidths')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </p>
+
+            <filter-list list-icon-class="dm-glyph-resolution nav-glyph" active-item="device.Resolution.Width" filter="filters.ScreenWidth"></filter-list>
+          </div>
+
+          <div class="col-xs-3">
+            <p class="device-filter-controls">
+              <button type="button" class="btn btn-add" ng-click="openAddFilterDialog('modal-height')">
+                Add
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+              <button type="button" class="btn btn-delete" ng-disabled="!device.Resolution.Height.Id" ng-click="deleteFilter(device.Resolution.Height, 'resolutionheights')">
+                Delete
+                <span class="dm-glyph-stack">
+                  <i class="dm-glyph-close"></i>
+                </span>
+              </button>
+            </p>
+
+            <filter-list list-icon-class="dm-glyph-resolution nav-glyph" active-item="device.Resolution.Height" filter="filters.ScreenHeight"></filter-list>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="device-filter-controls">
+            <button type="submit" class="btn btn-custom btn-sm" id="btnSave">Save</button>
+            <a ui-sref="search.devices" class="btn btn-default btn-sm">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Add os form -->
+<script type="text/ng-template" id="modal-os">
+  <form>
+    <fieldset>
+      <legend>Add New OS</legend>
+      <div class="form-group">
+        <label for="osName">Name</label>
+        <input id="osName" class="form-control input-sm" type="text" ng-model="$parent.newOsName">
+      </div>
+      <p class="text-right">
+        <button type="button" class="btn btn-primary" ng-click="$parent.addFilter('Os', 'os', 'Name')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>
+
+<!-- Add manufacturer form -->
+<script type="text/ng-template" id="modal-manufacturer">
+  <form>
+    <fieldset>
+      <legend>Add New Manufacturer</legend>
+      <div class="form-group">
+        <label for="manufacturerName">Name</label>
+        <input id="manufacturerName" class="form-control input-sm" type="text" ng-model="$parent.newManufacturerName">
+      </div>
+      <p class="text-right">
+        <button type="button" class="btn btn-primary" ng-click="$parent.addFilter('Manufacturer', 'manufacturers', 'Name')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>
+
+<!-- Add model form -->
+<script type="text/ng-template" id="modal-model">
+  <form>
+    <fieldset>
+      <legend>Add New Model</legend>
+      <div class="form-group">
+        <label for="modelName">Name</label>
+        <input id="modelName" class="form-control input-sm" type="text" ng-model="$parent.newModelName">
+      </div>
+      <p class="text-right">
+        <button type="button" class="btn btn-primary" ng-click="$parent.addFilter('Model', 'models', 'Name')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>
+
+<!-- Add color form -->
+<script type="text/ng-template" id="modal-color">
+  <form>
+    <fieldset>
+      <legend>Add New Color</legend>
+      <div class="form-group">
+        <label for="colorName">Name</label>
+        <input id="colorName" class="form-control input-sm" type="text" ng-model="$parent.newColorName">
+      </div>
+      <p class="text-right">
+        <button type="submit" class="btn btn-custom" ng-click="$parent.addFilter('Color', 'colors', 'Name')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>
+
+<!-- Add screen size form -->
+<script type="text/ng-template" id="modal-screen">
+  <form>
+    <fieldset>
+      <legend>Add New Screen Size</legend>
+      <div class="form-group">
+        <label for="screenSizeName">Name</label>
+        <input id="screenSizeName" class="form-control input-sm" type="text" ng-model="$parent.newScreenSizeName">
+      </div>
+      <p class="text-right">
+        <button type="submit" class="btn btn-custom" ng-click="$parent.addFilter('ScreenSize', 'screensizes', 'Size')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>
+
+<!-- Add resolution width form -->
+<script type="text/ng-template" id="modal-width">
+  <form>
+    <fieldset>
+      <legend>Add New Width</legend>
+      <div class="form-group">
+        <label for="resolutionWidthName">Name</label>
+        <input id="resolutionWidthName" class="form-control input-sm" type="text" ng-model="$parent.newResolutionWidthName">
+      </div>
+      <p class="text-right">
+        <button type="submit" class="btn btn-custom" ng-click="$parent.addFilter('ResolutionWidth', 'resolutionwidths', 'Dimention')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>
+
+<!-- Add resolution height form -->
+<script type="text/ng-template" id="modal-height">
+  <form>
+    <fieldset>
+      <legend>Add New Height</legend>
+      <div class="form-group">
+        <label for="resolutionHeightName">Name</label>
+        <input id="resolutionHeightName" class="form-control input-sm" type="text" ng-model="$parent.newResolutionHeightName">
+      </div>
+      <p class="text-right">
+        <button type="submit" class="btn btn-custom" ng-click="$parent.addFilter('ResolutionHeight', 'resolutionheights', 'Dimention')">Save</button>
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Close</button>
+      </p>
+    </fieldset>
+  </form>
+</script>

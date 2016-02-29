@@ -1,0 +1,92 @@
+﻿@model AdminUserModel
+
+@{
+    if (Model.AdminUser.Id.HasValue)
+    {
+        ViewBag.Title = "Edit user";
+        
+    }
+    else
+    {
+        ViewBag.Title = "Add user";
+    }
+}
+
+
+
+<div class="container-fluid" id="main-part">
+    <div class="hero-unit">
+        @if (Model.AdminUser.Id.HasValue)
+        {
+            <h2>Edit Admin</h2>
+        }
+        else
+        {
+            <h2>Add Admin</h2>
+        }        
+        <p ng-show="!root.me.IsAdmin">You are not able to see  this page</p>
+        <div ng-show="root.me.IsAdmin" class="well user-edit-form">
+            @using (Html.BeginForm("AddOrEdit", "Administrator", FormMethod.Post))
+            {
+                if (Model.AdminUser.Id.HasValue)
+                {
+                    @Html.HiddenFor(m => m.AdminUser.Id)
+                }
+
+                <div class="row-fluid">
+                    <fieldset class="span3">
+                        <label>Email:</label>
+                        @Html.TextBoxFor(m => m.AdminUser.Email)
+                        <div>
+                            <span class="help-inline">
+                                @Html.ValidationMessageFor(m => m.AdminUser.Email)
+                            </span>
+</div>
+                    </fieldset>
+                </div>
+
+                <div class="row-fluid">
+                    <fieldset class="span3">
+                        <label>Status:</label>
+                        @Html.DropDownListFor(m => m.AdminUser.StatusId, Model.Statuses)
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.AdminUser.StatusId)
+                        </span>
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Team:</label>
+                        @Html.DropDownListFor(m => m.AdminUser.TeamId, Model.Teams)
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.AdminUser.TeamId)
+                        </span>
+                    </fieldset>
+                </div>
+
+                <div class="row-fluid">
+                    @Html.LabelFor(m => m.AdminUser.IsAdmin, "Administrator:")
+                    @Html.CheckBoxFor(m => m.AdminUser.IsAdmin)
+                </div>
+                <div class="row-fluid">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/Common/Notifications.js")
+    @Scripts.Render("~/Scripts/Administrator/Index.js")
+    @Scripts.Render("~/bundles/UI/vendor")
+    @Scripts.Render("~/UI/js/app.js")
+    @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+    @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+    @Scripts.Render("~/UI/js/services/userModel.js")
+    @Scripts.Render("~/UI/js/services/RestSvc.js")
+    @Scripts.Render("~/UI/js/services/userSvc.js")
+    @Scripts.Render("~/Scripts/Employees/EmployeesPresenter.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+}

@@ -1,0 +1,74 @@
+﻿@model TeamModel
+
+
+@{
+    if (Model.Team.Id.HasValue)
+    {
+        ViewBag.Title = "Edit team";
+        
+    }
+    else
+    {
+        ViewBag.Title = "Add team";
+    }
+}
+
+
+
+
+
+<p ng-show="!root.me.IsAdmin">You must be admin to access this page</p>
+<div ng-show="root.me.IsAdmin" class="container-fluid" id="main-part">
+    <div class="hero-unit">
+        @if (Model.Team.Id.HasValue)
+        {
+            <h2>Edit team</h2>
+        }
+        else
+        {
+            <h2>Add team</h2>
+        }
+
+        <div class="well">
+            @using (Html.BeginForm("AddOrEdit", "Team", FormMethod.Post, new { enctype = "multipart/form-data", id = "formDevice" }))
+            {
+                @Html.HiddenFor(m => m.Team.Id)
+
+                <div class="row-fluid">
+                    <fieldset class="span3">
+                        <label>Name</label>
+                        @Html.TextBoxFor(m => m.Team.Name, new { maxlength = 20 })
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Team.Name)
+                        </span>
+                    </fieldset>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="errorPopup" style="display: none;" class="popup">
+    <p></p>
+    <span class="close">x</span>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+    @Scripts.Render("~/bundles/UI/vendor")
+    @Scripts.Render("~/UI/js/app.js")
+    @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+    @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+    @Scripts.Render("~/UI/js/services/userModel.js")
+    @Scripts.Render("~/UI/js/services/RestSvc.js")
+    @Scripts.Render("~/UI/js/services/userSvc.js")
+    @Scripts.Render("~/Scripts/Common/Notifications.js")
+    @Scripts.Render("~/Scripts/Team/Index.js")
+
+}

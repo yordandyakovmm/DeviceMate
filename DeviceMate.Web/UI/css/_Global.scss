@@ -1,0 +1,61 @@
+// Vars:
+// ==================
+//
+$COLOR_AVAILABLE: #71e2aa;
+$COLOR_NOTAVAILABLE: #e27171;
+$COLOR_LINK : #71b3e2;
+$COLOR_HOVER : #367eb3;
+$COLOR_HEADER_BACKGROUND: #231F20;
+$COLOR_HEADER_ONHOVER: #FBAC42;
+$COLOR_BODY_BACKGROUND: #F5F5F5;
+$COLOR_BORDERS: #DCDCDC;
+$COLOR_TAB_SELECTED: #fbac43;
+$COLOR_FORM_ELEMENTS: #5087C7;
+$COLOR_ADD: #57BA53;
+$COLOR_DELETE: #D53A38;
+
+// Mixins:
+// ==================
+//
+
+@mixin ps-background-linear($startColor, $endColor, $startPos: 0%, $endPos: 100%) {
+  background-image: -webkit-linear-gradient(bottom, $startColor $startPos, $endColor $endPos);
+  background-image:    -moz-linear-gradient(bottom, $startColor $startPos, $endColor $endPos);
+  background-image:     -ms-linear-gradient(bottom, $startColor $startPos, $endColor $endPos);
+  background-image:      -o-linear-gradient(bottom, $startColor $startPos, $endColor $endPos);
+  background-image:         linear-gradient(bottom, $startColor $startPos, $endColor $endPos);
+}
+
+@mixin ps-box-shadow($val) {
+  -webkit-box-shadow: $val;
+     -moz-box-shadow: $val;
+          box-shadow: $val;
+}
+
+@mixin ps-border-radius($rad) {
+  -webkit-border-radius: $rad;
+     -moz-border-radius: $rad;
+      -ms-border-radius: $rad;
+          border-radius: $rad;
+}
+
+@mixin ps-transform-skew($Xdeg, $Ydeg) {
+  -webkit-transform: skew($Xdeg, $Ydeg); /* Safari and Chrome */
+      -ms-transform: skew($Xdeg, $Ydeg); /* IE 9 */
+          transform: skew($Xdeg, $Ydeg);
+}
+
+@mixin ps-disable-selection() {
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
+
+@mixin ps-box-sizing($val) {
+  -webkit-box-sizing: $val;
+     -moz-box-sizing: $val;
+          box-sizing: $val;
+}

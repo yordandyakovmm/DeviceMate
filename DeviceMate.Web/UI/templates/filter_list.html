@@ -1,0 +1,9 @@
+<div>
+  <ul class="filter-list">
+    <li class="clearfix" ng-repeat="item in vm.filter track by item.Id" data-id="{{ item.Id }}" ng-click="vm.activateItem(item)" ng-class="{'active': vm.activeItemId === item.Id }">
+      <span><i ng-class="vm.getListIcon(item)"></i></span>
+      <span>{{ item.Name }}</span>
+    </li>
+  </ul>
+  <div ng-transclude></div>
+</div>

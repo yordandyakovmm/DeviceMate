@@ -1,0 +1,10 @@
+<div>
+    <div class="ngdialog-message">
+      <h4>{{ modal.title }}</h4>
+      <p ng-bind-html="modal.message"></p>
+      <p class="text-right">
+        <button class="btn btn-custom" ng-click="confirm()">Ok</button>
+        <button class="btn btn-default" ng-click="closeThisDialog()">Cancel</button>
+      </p>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2fa935e8cb2478ca445f6fe85361d79" Name="Diagram1">
+        <EntityTypeShape EntityType="DeviceMateModel.Accessory" Width="1.5" PointX="8.25" PointY="11.625" />
+        <EntityTypeShape EntityType="DeviceMateModel.AccessoryDescription" Width="1.5" PointX="6" PointY="18.875" />
+        <EntityTypeShape EntityType="DeviceMateModel.AccessoryHoldsHistory" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="DeviceMateModel.AccessoryType" Width="1.5" PointX="6" PointY="16.5" />
+        <EntityTypeShape EntityType="DeviceMateModel.Color" Width="1.5" PointX="6" PointY="7.5" />
+        <EntityTypeShape EntityType="DeviceMateModel.DeviceHoldsHistory" Width="1.5" PointX="3" PointY="16" />
+        <EntityTypeShape EntityType="DeviceMateModel.Device" Width="1.5" PointX="8.25" PointY="6.25" />
+        <EntityTypeShape EntityType="DeviceMateModel.DeviceType" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="DeviceMateModel.GridColumn" Width="1.5" PointX="9" PointY="32.5" />
+        <EntityTypeShape EntityType="DeviceMateModel.Grid" Width="1.5" PointX="6.75" PointY="32.625" />
+        <EntityTypeShape EntityType="DeviceMateModel.Hold" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="DeviceMateModel.Manufacturer" Width="1.5" PointX="3.75" PointY="22.125" />
+        <EntityTypeShape EntityType="DeviceMateModel.Model" Width="1.5" PointX="6" PointY="22.125" />
+        <EntityTypeShape EntityType="DeviceMateModel.OSs" Width="1.5" PointX="6" PointY="4" />
+        <EntityTypeShape EntityType="DeviceMateModel.ResolutionHeightOption" Width="1.5" PointX="3.75" PointY="24.875" />
+        <EntityTypeShape EntityType="DeviceMateModel.Resolution" Width="1.5" PointX="6" PointY="25.75" />
+        <EntityTypeShape EntityType="DeviceMateModel.ResolutionWidthOption" Width="1.5" PointX="3.75" PointY="27.125" />
+        <EntityTypeShape EntityType="DeviceMateModel.Role" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DeviceMateModel.ScreenSize" Width="1.5" PointX="6" PointY="29.5" />
+        <EntityTypeShape EntityType="DeviceMateModel.Status" Width="1.5" PointX="3.75" PointY="4.625" />
+        <EntityTypeShape EntityType="DeviceMateModel.Team" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="DeviceMateModel.Town" Width="1.5" PointX="0.75" PointY="9.375" />
+        <EntityTypeShape EntityType="DeviceMateModel.User" Width="1.5" PointX="6" PointY="11.375" />
+        <EntityTypeShape EntityType="DeviceMateModel.UsersGridColumn" Width="1.5" PointX="11.25" PointY="12.375" />
+        <AssociationConnector Association="DeviceMateModel.FK_Accessories_AccessoryDescriptions" />
+        <AssociationConnector Association="DeviceMateModel.FK_Accessories_AccessoryTypes" />
+        <AssociationConnector Association="DeviceMateModel.FK_Accessories_Colors" />
+        <AssociationConnector Association="DeviceMateModel.FK_Accessories_Hold" />
+        <AssociationConnector Association="DeviceMateModel.FK_Accessories_OSs" />
+        <AssociationConnector Association="DeviceMateModel.FK_AccessoryHoldsHistory_Accessories" />
+        <AssociationConnector Association="DeviceMateModel.FK_AccessoryHoldsHistory_Teams" />
+        <AssociationConnector Association="DeviceMateModel.FK_AccessoryHoldsHistory_Towns" />
+        <AssociationConnector Association="DeviceMateModel.FK_DeviceColor" />
+        <AssociationConnector Association="DeviceMateModel.FK_DeviceHoldsHistory_Devices" />
+        <AssociationConnector Association="DeviceMateModel.FK_DeviceHoldsHistory_Teams" />
+        <AssociationConnector Association="DeviceMateModel.FK_DeviceHoldsHistory_Towns1" />
+        <AssociationConnector Association="DeviceMateModel.FK_DeviceHoldDevice" />
+        <AssociationConnector Association="DeviceMateModel.FK_Devices_DeviceTypes" />
+        <AssociationConnector Association="DeviceMateModel.FK_Devices_Models" />
+        <AssociationConnector Association="DeviceMateModel.FK_Devices_Resolutions" />
+        <AssociationConnector Association="DeviceMateModel.FK_Devices_ScreenSizes" />
+        <AssociationConnector Association="DeviceMateModel.FK_GridColumns_Grids" />
+        <AssociationConnector Association="DeviceMateModel.FK_UsersGridColumns_GridColumns" />
+        <AssociationConnector Association="DeviceMateModel.FK_Hold_Towns" />
+        <AssociationConnector Association="DeviceMateModel.FK_TeamDeviceHold" />
+        <AssociationConnector Association="DeviceMateModel.FK_Manufacturers_OS" />
+        <AssociationConnector Association="DeviceMateModel.FK_Models_Manufacturers" />
+        <AssociationConnector Association="DeviceMateModel.FK_Resolutions_ResolutionHeightOptions" />
+        <AssociationConnector Association="DeviceMateModel.FK_Resolutions_ResolutionWidthOptions" />
+        <AssociationConnector Association="DeviceMateModel.FK_Users_Status" />
+        <AssociationConnector Association="DeviceMateModel.FK_Users_Teams" />
+        <AssociationConnector Association="DeviceMateModel.FK_Users_Towns" />
+        <AssociationConnector Association="DeviceMateModel.FK_UsersGridColumns_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

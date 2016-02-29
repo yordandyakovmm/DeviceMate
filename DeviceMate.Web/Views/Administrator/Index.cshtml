@@ -1,0 +1,131 @@
+﻿@using DeviceMate.Core.Helpers
+@model AdminUserModel
+@{
+    ViewBag.Title = "Users";
+}
+
+
+
+<div class="container-fluid admin-users-table-container" id="main-part">
+    @Html.Partial("_SuccessNotification")
+    @if (Model.AdminUsers.Count() == 0)
+    {
+        @:No devices found.
+    }
+    else
+    {
+        if (ViewBag.IsAdmin)
+        {
+        <a href="@Url.Action("AddOrEdit", "Administrator")" class="btn btn-custom js-disable-on-db-update">Add Admin/User</a>
+
+        <a id="UpdateAll" data-style="slide-down" class="btn btn-custom pull-right ladda-button js-disable-on-db-update"><span class="ladda-label">Update Users DB</span></a>
+        }
+        <table  id="search-table" class="table table-striped table-bordered team-table"
+               data-employees-default-picture="@Url.Content("/Content/images/mentormate-logo.png")"
+               data-employees-extra-data-url="@Url.Action("Index", "Employee")">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Skype</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th>Team</th>
+                    @if (ViewBag.IsAdmin)
+                    {
+                        <th>Edit</th>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var admin in Model.AdminUsers)
+                {
+                    <tr data-item-id="@admin.Id">
+                        <td>@admin.Name</td>
+                        <td class="td-email">
+                            <span class="email-text">@admin.Email</span>
+
+                        </td>
+
+                        <td class="td-skype">
+
+                            <dd class="current-holder-contacts">
+                                <div class="profile-images-container">
+                                    <div class="profile-pic-holder">
+                                        <div class="profile-pic-positioner">
+                                            <img src="@admin.PictureUrl" width="48" class="current-holder-picture" />
+                                        </div>
+                                    </div>
+                                    <div  class="popup-image">
+                                        <i class="icon-shareable nav-glyph">@(admin.Team != null ? admin.Team.Name : string.Empty)</i>
+                                        <div class="details-zone">
+                                            <div class="profile-pic-holder">
+                                                <div class="profile-pic-positioner">
+                                                    <img src="@admin.PictureUrl" class="current-holder-picture" />
+                                                </div>
+                                            </div>
+                                            <span>@admin.Name</span>
+                                            <a href="mailto:@admin.Email" >@admin.Email</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <a class="link-skype" href="skype:@admin.Skype?chat">
+                                <img src="~/UI/images/icon-skype.png" width="20" class="current-holder-skype"/>
+                                </a>
+                            </dd>
+
+                        </td>
+                        <td class="td-location">
+                            <a href="/Employee/Location?email=@admin.Email" target="_blank">
+                                <span> @(admin.Town != null ? admin.Town.Name : string.Empty)</span>
+                                <img src="~/UI/images/icon-location.png" alt="Alternate Text" target="_blank" />
+                            </a>
+                        </td>
+                        <td>@admin.Status.Name</td>
+                        <td><span class="email-text">@(admin.IsAdmin ? "Admin" : "User")</span></td>
+                        <td>@(admin.Team != null ? admin.Team.Name : string.Empty)</td>
+
+                        @if (ViewBag.IsAdmin)
+                        {
+                            <td>
+                                @if (admin.Email != User.Identity.Name)
+                                {
+                                    <a href="@Url.Action("AddOrEdit", "Administrator", new { Id = admin.Id })" class="btn btn-custom js-disable-on-db-update">edit</a>
+                                    <button data-url="@Url.Action("Delete", "Administrator", new { Id = admin.Id})"
+                                            data-item-id="@admin.Id" class="btn delete js-disable-on-db-update">
+                                        delete
+                                    </button>
+
+                                    <a data-item-id="@admin.Id" data-style="slide-down" class="update-user btn btn-custom ladda-button"><span class="ladda-label">update user DB</span></a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/Common/Notifications.js")
+    @Scripts.Render("~/Scripts/Common/LoadingHelper.js")
+    @Scripts.Render("~/Scripts/spin.js")
+    @Scripts.Render("~/Scripts/ladda.js")
+    @Scripts.Render("~/Scripts/ladda.jquery.js")
+    @Scripts.Render("~/Scripts/Administrator/Index.js")
+    @Scripts.Render("~/bundles/UI/vendor")
+    @Scripts.Render("~/UI/js/app.js")
+    @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+    @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+    @Scripts.Render("~/UI/js/services/userModel.js")
+    @Scripts.Render("~/UI/js/services/RestSvc.js")
+    @Scripts.Render("~/UI/js/services/userSvc.js")
+    @Scripts.Render("~/Scripts/Employees/EmployeesPresenter.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+}

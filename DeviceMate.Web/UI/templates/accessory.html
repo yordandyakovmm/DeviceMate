@@ -1,0 +1,167 @@
+<div id="main-part">
+  <form ng-submit="vm.saveAccessory()" class="hero-unit">
+    <div class="Add-edit-page-header">
+      <div class="AddEdit-head">
+        <i class="dm-glyph-cog nav-glyph"></i> Manage
+      </div>
+      <span class="add-header text-uppercase">Add new accessory</span>
+    </div>
+    <div class="add-device-block">
+      <div class="container-fluid gray-bar">
+        <div class="row">
+          <div class="AddEdit-bar">
+            <i class="icon-sitemap nav-glyph"></i> General
+          </div>
+
+          <div class="col-xs-3">
+            <span class="add-header2">GENERAL INFORMATION</span>
+            <p class="add-header-tip">Accessory number &amp; info</p>
+          </div>
+          <div class="col-xs-3">
+            <span class="add-header2">ACCESSORY TYPE</span>
+          </div>
+          <div class="col-xs-3">
+            <span class="add-header2">TOWN</span>
+            <p class="add-header-tip">Accessory location</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nopadding">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-3">
+              <table class="table table-vertical-header no-device-filter-controls">
+                <tr>
+                  <th class="text-right"><label>Accessory Number</label></th>
+                  <td><input type="text" required class="form-control input-sm flat-input" ng-model="vm.accessory.Name"></td>
+                </tr>
+
+                <tr>
+                  <th class="text-right"><label>Additional Info</label></th>
+                  <td><input type="text" required class="form-control input-sm flat-input" ng-model="vm.accessory.Info"></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="device-filter-controls">
+                <button type="button" class="btn btn-add" ng-click="vm.openAddFilterDialog('ACCESSORY_TYPE', vm.accessory.Type.Name)">
+                  Add
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-delete" ng-disabled="!vm.filters.AccessoryType" ng-click="vm.openDeleteFilterDialog('ACCESSORY_TYPE', vm.accessory.Type.Id)">
+                  Delete
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+              </div>
+
+              <filter-list list-icon-class="dm-glyph dm-glyph-accessories" active-item="vm.accessory.Type" filter="vm.filters.AccessoryType"></filter-list>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="no-device-filter-controls">
+                <filter-list class="no-device-filter-controls" list-icon-class="dm-glyph dm-glyph-pin" active-item="vm.accessory.Holder.Location" filter="vm.filters.Cities"></filter-list>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid gray-bar">
+        <div class="row">
+          <div class="AddEdit-bar">
+            <i class="dm-glyph-os nav-glyph"></i> OS
+          </div>
+
+          <div class="col-xs-3">
+            <span class="add-header2">OS</span>
+            <p class="add-header-tip">Accessory OS</p>
+          </div>
+          <div class="col-xs-3">
+            <span class="add-header2">ADDITIONAL INFORMATION</span>
+            <p class="add-header-tip">Accessory Descriptions</p>
+          </div>
+          <div class="col-xs-3">
+            <span class="add-header2">Color</span>
+            <p class="add-header-tip">Accessory Color</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nopadding">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="device-filter-controls">
+                <button type="button" class="btn btn-add" ng-click="vm.openAddFilterDialog('OS', vm.accessory.Platform.Name)">
+                  Add
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-delete" ng-disabled="!vm.filters.Platforms.length || !vm.accessory.Platform.Id" ng-click="vm.openDeleteFilterDialog('OS', vm.accessory.Platform.Id)">
+                  Delete
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+              </div>
+
+              <filter-list list-icon-class="dm-glyph dm-glyph-os" active-item="vm.accessory.Platform" filter="vm.filters.Platforms"></filter-list>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="device-filter-controls">
+                <button type="button" class="btn btn-add" ng-click="vm.openAddFilterDialog('ACCESSORY_DESCRIPTION', vm.accessory.Description.Name)">
+                  Add
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-delete" ng-disabled="!vm.filters.Descriptions.length || !vm.accessory.Description.Id" ng-click="vm.openDeleteFilterDialog('ACCESSORY_DESCRIPTION', vm.accessory.Description.Id)">
+                  Delete
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+              </div>
+
+              <filter-list list-icon-class="glyphicon glyphicon-tag" active-item="vm.accessory.Description" filter="vm.filters.Descriptions"></filter-list>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="device-filter-controls">
+                <button type="button" class="btn btn-add" ng-click="vm.openAddFilterDialog('COLORS', vm.accessory.Color.Name)">
+                  Add
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-delete" ng-disabled="!vm.filters.Colors.length || !vm.accessory.Color.Id" ng-click="vm.openDeleteFilterDialog('COLORS', vm.accessory.Color.Id)">
+                  Delete
+                  <span class="dm-glyph-stack">
+                    <i class="dm-glyph-close"></i>
+                  </span>
+                </button>
+              </div>
+
+              <filter-list list-icon-class="glyphicon glyphicon-tint" active-item="vm.accessory.Color" filter="vm.filters.Colors"></filter-list>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="device-filter-controls">
+            <button type="submit" class="btn btn-custom btn-sm">Save</button>
+            <a ui-sref="search.accessories" class="btn btn-default btn-sm">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

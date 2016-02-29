@@ -1,0 +1,14 @@
+<div class="btn-group {{class}}" dropdown is-open="isopen">
+    <button type="button" class="btn btn-primary">{{currentValue.text}}</button>
+    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-class="currentValue.class ? currentValue.class : '' || (dropdownData | filter: {selected: true})[0].text ? '' : 'placeholder'" ng-disabled="disabled">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li ng-repeat="item in dropdownData" add-attribute="item.options" value="{{item.value}}">
+        <a ng-href="{{item.options.href}}" class="{{optionsClass}}" ng-click="handleClick(item)">
+          {{item.text}}
+        </a>
+      </li>
+    </ul>
+</div>

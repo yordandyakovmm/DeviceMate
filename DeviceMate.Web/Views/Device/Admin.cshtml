@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="navbar navbar-fixed-top" id="top-bar">
+    <div class="navbar-inner">
+        <div class="container-fluid" id="header-container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="brand">Administration</span>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Log off", "Logout", "Account")</li>
+                </ul>         
+            </div>
+        </div><!-- /.container -->
+    </div><!-- /.navbar-inner -->
+</div><!-- /.navbar -->
+<div class="container-fluid" id="main-part">
+    <div class="hero-unit">
+        <h2>Edit administrators</h2>
+        <div class="well" >
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+<div class="head-container">
+  <aside class="availability-filters">
+    <div class="nav-availability">
+      <button class="active" ng-click="filterByAvailabilityAccessories($event)">
+        <span class="availability-label">Show All</span>
+      </button>
+      <button id="true" class="available" ng-click="filterByAvailabilityAccessories($event)">
+        <span class="availability-label">Available</span>
+        <!-- span class="availability-count" ng-bind="availableCount"></span -->
+      </button>
+      <button id="false" class="not-available" ng-click="filterByAvailabilityAccessories($event)">
+        <span class="availability-label">Not Available</span>
+        <!-- span class="availability-count" ng-bind="notAvailableCount"></span -->
+      </button>
+    </div>
+  </aside>
+
+  <div class="sorting-holder">
+    <span>Sort By</span>
+    <select ng-model="sortBy" ng-change="sortAccessories()">
+      <option ng-repeat="sortColumn in accessorySortColumns" value="{{sortColumn.id}}">{{sortColumn.name}}</option>
+    </select>
+
+    <img class="direction-image" ng-src="UI/images/icon-{{itemsOrder}}.png" ng-click="changeAccessoriesSortDirection($event)"></img>
+  </div>
+
+  <div class="pagination-holder">
+    <span ng-show="totalCount">
+        <select ng-options="option.offset as option.text for option in accessoriesRangeList" ng-model="criteria.offset" ng-change="updatePage()"></select>
+        </b>
+        </span> of <b><span ng-bind="totalCount"></span></b> Devices
+    </span>
+    <img src="UI/images/btn-30-left.png" ng-click="loadPreviousAccessoriesPage()" />
+    <img src="UI/images/btn-30-right.png" ng-click="loadNextAccessoriesPage()" />
+  </div>
+  <div class="searchbox-holder">
+    <form name="searchForm" class="search-decoration" ng-submit="submitAccessoriesSearchByKeyword()">
+      <input name="keyword" type="text" class="searchbox" value="" ng-model="criteria.Keyword" ng-model-options="{ debounce: 500 }" placeholder="TYPE YOUR SEARCH HERE" ng-change="submitAccessoriesSearchByKeyword()" />
+      <span ng-show="criteria.Keyword.length > 0" class="search-clear ng-hide" ng-click="resetKeyword()">
+    <i class="glyphicon glyphicon-remove"></i>
+    </span>
+      <input type="submit" value="" class="ng-hide" />
+    </form>
+  </div>
+</div>
+<div class="grid-holder" ui-view>
+    <dl ng-repeat="accessory in accessories" class="item-holder item-accessory search-result-item" ng-click="prepSubmission(accessory);">
+
+
+        <dd class="accessory-type">
+            <i class="dm-glyph-{{accessory.type | lowercase}}"></i>
+        </dd>
+        <dd class="item-details">
+            <span class="item-manufacturer">{{accessory.name}}</span>
+            <span class="item-model">{{accessory.model}}</span>
+            <span ng-click="$event.stopPropagation();" class="item-info">{{accessory.info}}</span>
+        </dd>
+        <dt class="accesory-identifier {{accessory.isBusyClass}}">{{accessory.itemNumber}}</dt>
+        <dd class="platform-version">
+        <dd ng-class="{'platform-notset':!accessory.osType}" class="platform platform-{{accessory.osType.toLowerCase()}}"></dd>
+        </dd>
+
+
+        <dd class="device-color">
+            <span class="device-color-name">{{accessory.color}}</span>
+            <span ng-if="!accessory.color" class="device-color-name">N/A</span>
+            <span ng-if="accessory.color" class="device-color-hex" style="background-color: {{accessory.colorHex}};"></span>
+        </dd>
+
+        <dd class="item-location">
+            <a ng-click="stopPropagation($event);" ng-href="/Employee/Location/?email={{accessory.email}}" target="_blank">
+                <span class="location-name">{{accessory.location}}</span>
+                <i class="location"></i>
+            </a>
+        </dd>
+        <dd class="current-holder-contacts">
+            <div class="profile-images-container">
+                <div class="profile-pic-holder">
+                    <div class="profile-pic-positioner">
+                        <img ng-src="{{accessory.holderProfileImage}}" width="48" class="current-holder-picture" />
+                    </div>
+                </div>
+                <div ng-if="accessory.holderProfileImage" class="popup-image">
+                    <i class="icon-shareable nav-glyph"> {{accessory.team}}</i>
+                    <div class="details-zone">
+                        <div class="profile-pic-holder">
+                            <div class="profile-pic-positioner">
+                                <img ng-src="{{accessory.holderProfileImage}}" class=3"current-holder-picture" />
+                            </div>
+                        </div>
+                        <span>{{accessory.holderName}}</span>
+                        <a href="mailto:{{accessory.email}}" ng-click="stopBubbling($event)">{{accessory.email}}</a>
+                    </div>
+        </div>
+      </div>
+      <a class="link-skype" href="#">
+
+        <img src="UI/images/icon-skype.png" width="20" class="current-holder-skype" />
+      </a>
+    </dd>
+    <dd class="current-holder-info">
+      <span class="current-holder-team">{{accessory.team}}</span>
+      <a href="mailto:{{accessory.email}}" ng-click="stopBubbling($event)" class="current-holder-email">{{accessory.email}}</a>
+    </dd>
+
+     <dd class="buttons-holder" ng-show="root.me.IsAdmin">
+      <a ui-sref="accessory({ accessoryId: accessory.itemID })" ng-click="stopBubbling($event)" class="btn-custom small-circle"><i class="icon-pencil"></i></a>
+      <button ng-click="deleteAccessory(accessory,$event)" data-item-id="260" class="small-circle">
+        <i class="icon-cancel"></i>
+      </button>
+    </dd>
+   <dd class="recent-activity">
+      <a class="last-activity" title="{{accessory.dateTaken}}" am-time-ago="accessory.dateTaken" ng-click="showHistory(accessory)"></a>
+    </dd>
+    <dd class="hr"></dd>
+  </dl>
+
+  <!-- BEGIN Submission form -->
+  <div class="submit-devices-holder ">
+    <div class="submit-device-holder " ng-repeat="accessory in accessoriesForSubmission ">
+      <h2 class="title "><span class="device-identifier {{accessory.isBusyClass}} ">{{accessory.name}}</span> <span class="text"> will be submitted</span></h2>
+      <div class="submission-data ">
+
+        <div class="filter filter-city ">
+          <button type="button " class="filter-header ">
+            <span class="filter-header-label ">City</span>
+            <span class="filter-header-selected-item ">Sofia</span>
+          </button>
+          <nav class="filter-content ">
+            <ul>
+              <li>Sofia</li>
+              <li>Plovdiv</li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="filter filter-team filter-expanded ">
+          <button type="button " class="filter-header ">
+            <span class="filter-header-label ">Team</span>
+            <span class="filter-header-selected-item "></span>
+          </button>
+          <nav class="filter-content ">
+            <ul>
+              <li ng-class="{'selected-team' : team.Id == accessory.teamID}" ng-click="setTeam(team,accessory)" ng-repeat="team in teams" scroll-if="team.Id == accessory.teamID">{{team.Name}}</li>
+            </ul>
+          </nav>
+        </div>
+        <div class='isBussy-button'>
+            <input id="accessory_{{accessory.itemID}}" type="checkbox" ng-model="accessory.IsBusy">
+            <label for="accessory_{{accessory.itemID}}"> <span></span>Item is available</label>
+      </div>
+      </div>
+      <!-- END .submission-data -->
+      <div class="submission-buttons ">
+        <button type="button " class="btn btn-close " ng-click="removeAccessory(accessory); ">
+          <span class="btm-label ">Close</span>
+
+        </button>
+        <button type="button " class="btn btn-submit " ng-click="submitAccessory(accessory); ">
+          <span class="btn-label ">Submit</span>
+
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- END Submission form -->
+
+  <item-history item="currentAccessory" item-type="accessories" ng-show="historyShown" on-history-close="hideHistory()"></item-history>
+</div>

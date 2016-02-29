@@ -1,0 +1,480 @@
+@import "_Global.scss";
+
+/**
+ * Grid.scss
+ */
+
+.logo-wrapper {
+  
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: block;
+    width: 165px;
+    height: 45px;
+    background: url('../images/logo-mm.png') no-repeat 0 0;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+.color-available { color: $COLOR_AVAILABLE; }
+.color-notavailable { color: $COLOR_NOTAVAILABLE; }
+
+.content-holder {
+  margin-top: 75px;
+}
+
+.nav-pills {
+  float: left;
+  margin: 0;
+  padding: 15px 0;
+  list-style-type: none;
+
+  li {
+    margin: 0;
+    padding: 5px 15px;
+    margin-right: 10px;
+    float: left;
+    color: #fff;
+    @include ps-border-radius(3px);
+
+    span {
+      color: gray;
+    }
+
+    a:hover {
+      color: $COLOR_HOVER;
+    }
+
+    &.available {
+      a {
+        color: #61b68c;
+      }
+    }
+
+    &.not-available {
+      a {
+        color: #b66161;
+      }
+    }
+
+    &.active,
+    &:hover {
+      cursor: pointer;
+      background-color: $COLOR_LINK;
+
+      a, span {
+        color: #fff;
+      }
+    }
+
+  }
+}
+
+.searchbox-holder {
+  clear: both;
+  padding: 15px;
+  background-color: $COLOR_LINK;
+
+  .search-decoration {
+    padding-left: 48px;
+    background: url('../images/icon-45-search.png') no-repeat -5px 2px;
+
+    .searchbox {
+      padding: 15px;
+      width: 100%;
+      outline: 0;
+      border: 0;
+      border-left: 1px solid #fff;
+      background-color: transparent;
+      color: #fff;
+
+      @include ps-box-sizing(border-box);
+    }
+
+    .searchbox::-webkit-input-placeholder {
+      color: #fff;
+    }
+    .searchbox::-moz-placeholder {
+      color: #fff;
+    }
+    .searchbox:-moz-placeholder {
+      color: #fff;
+    }
+    .searchbox::-ms-input-placeholder {
+      color: #fff;
+    }
+    .searchbox::input-placeholder {
+      color: #fff;
+    }
+  }
+}
+
+.grid-holder {
+  clear: both;
+  border: 1px solid #ccc;
+  border-width: 1px 0;
+
+  .item-holder {
+    clear: both;
+    margin: 0;
+    padding: 15px;
+    cursor: pointer;
+    height: 80px;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+
+    @include ps-box-sizing(border-box);
+
+    &:last-child {
+      border: 0;
+    }
+
+    &:hover {
+      border-bottom: 1px solid #fff;
+      @include ps-box-shadow(0 0 5px rgba(0, 0, 0, .5));
+    }
+
+    dt, dd {
+      float: left;
+      margin: 0;
+      padding: 0 15px 0 0;
+    }
+
+    //
+    // Begin devices:
+    //
+    .platform-version,
+    .device-screen,
+    .device-color,
+    .item-location {
+      padding-top: 4px;
+    }
+    
+    .device-identifier {
+      padding-top: 4px;
+      width: 60px;
+      font-size: 28px;
+      color: $COLOR_NOTAVAILABLE;
+
+      &.color-available {
+        color: $COLOR_AVAILABLE;
+      }
+    }
+
+    .platform {
+      width: 45px;
+      height: 45px;
+      background: url('../images/device-platform.png') no-repeat 0 0;
+
+      &.platform-android { background-position: 0 0; }
+      &.platform-ios { background-position: 0 -45px; }
+      &.platform-windows-phone {  }
+    }
+
+    .item-type {
+      width: 45px;
+      height: 45px;
+      background: url('../images/device-type.png') no-repeat 0 0;
+
+      &.item-tablet { background-position: 0 -45px; }
+      &.item-phone { background-position: 0 0; }
+    }
+
+    // Item details:
+    .item-details {
+      width: 300px;
+      
+      span {
+        display: block;
+      }
+      
+      .item-manufacturer {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .item-model {
+        font-size: 12px;
+        color: #ccc;
+      }
+
+      .item-info {
+        font-size: 12px;
+      }
+    } // End of .item-details
+
+    .platform-version {
+      width: 60px;
+
+      span {
+        display: block;
+        text-align: center;
+      }
+      
+      .platform-type {
+        font-size: 12px;
+      }
+      
+      .platform-version {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+    } // End of .platform-version
+
+    .device-screen {
+      width: 60px;
+
+      span {
+        display: block;
+        text-align: center;
+      }
+
+      .device-resolution {
+        font-size: 12px;
+      }
+
+      .device-screen-size {
+        font-size: 18px;
+      }
+
+    } // End of .device-screen
+
+    .device-color {
+      width: 50px;
+      
+      span {
+        display: block;
+        text-align: center;
+      }
+
+      .device-color-name {
+        font-size: 12px;
+      }
+
+      .device-color-hex {
+        margin: 0 auto;
+        width: 24px;
+        height: 24px;
+        @include ps-border-radius(3px);
+      }
+
+    } // End of .device-color
+
+    .item-location {
+      width: 90px;
+
+      i.location {
+        margin: 0 auto;
+        display: block;
+        width: 45px;
+        height: 30px;
+        background: url('../images/icon-location.png') no-repeat 0 0;
+      }
+
+      .location-name {
+        display: block;
+        font-size: 12px;
+        color: #71b3e2;
+        text-align: center;
+      }
+
+    } // End of .item-location
+
+    .current-holder-contacts {
+
+      a {
+        position: relative;
+        display: block;
+      }
+
+      img {
+        display: block;
+      }
+
+      .current-holder-picture {
+        @include ps-border-radius(24px);
+      }
+
+      .current-holder-skype {
+        position: absolute;
+        right: -4px;
+        bottom: -4px;
+      }
+
+    } // End of .item-current-holder
+
+    .current-holder-info {
+
+      span {
+        display: block;
+      }
+
+      .current-holder-team {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .current-holder-email {
+        font-size: 13px;
+      }
+
+    } // End of .current-holder-info
+
+    .recent-activity {
+      float: right;
+
+      a {
+        display: block;
+        padding-bottom: 30px;
+        font-size: 12px;
+        background: url('../images/icon-clock.png') no-repeat center bottom;
+      }
+    }
+
+    .hr {
+      clear: both;
+      float: none;
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+  } // End of .item-holder
+
+} // End of .grid-holder
+
+.submit-device-holder {
+  /*
+   * REMOVE TO VIEW SUBMISSION FORM:
+   */
+  display: none;
+
+
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  height: 622px;
+  background-color: #fff;
+  border: 5px solid #67676c;
+  @include ps-box-shadow(0 0 5px #888);
+
+  .title {
+    margin: 0;
+    padding: 15px;
+    font-size: 13px;
+    background-color: #67676c;
+    color: #fff;
+    font-weight: normal;
+
+    .device-identifier {
+      color: #71E2AA;
+      font-size: 28px;
+    }
+  } // End of .title
+  
+  .filter {
+
+    .filter-header {
+      display: block;
+      margin: 0;
+      padding: 5%;
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #e6e2e9;
+      background-color: #f1f1f1;
+      
+      .filter-header-label {
+        float: left;
+      }
+
+      .filter-header-selected-item {
+        float: right;
+        padding-right: 20px;
+        color: $COLOR_LINK;
+        background: url('../images/icon-15-down-white.png') no-repeat right center;
+      }
+
+    } // End of .filter-header
+
+    .filter-content {
+      display: none;
+      color: $COLOR_LINK;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+
+      li {
+        margin: 0;
+        padding: 10px 15px;
+        cursor: pointer;
+
+        &:hover {
+          @include ps-box-shadow(0 0 5px #888);
+        }
+      }
+
+    } // End of .filter-content
+
+    &:last-child .filter-header {
+      border: 0;
+    }
+
+    &.filter-expanded {
+      .filter-content {
+        display: block;
+      }
+    }
+  } // End of .filter
+
+  .submission-buttons {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+
+    .btn {
+      // padding: 5px 15px 5px 45px;
+      padding: 5px 35px;
+      border: 0;
+      background-color: #f1f1f1;
+      @include ps-border-radius(3px);
+
+      span {
+        display: block;
+        text-align: left;
+      }
+
+      .btn-shortcut {
+        font-size: 11px;
+      }
+    }
+
+    .btn.btn-close {
+      float: left;
+      margin: 15px 0 15px 15px;
+      color: #B35959;
+      border: 1px solid #ccc;
+    }
+
+    .btn.btn-submit {
+      float: right;
+      margin: 15px 15px 15px 0;
+      background-color: $COLOR_HOVER;
+      color: #fff;
+    }
+
+  }
+
+} // End of .submit-device-holder

@@ -1,0 +1,198 @@
+﻿@model DeviceMate.Web.Models.DeviceModel
+
+@{
+    ViewBag.Title = "Search device";
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/Common/Lists.js")
+    @*@Scripts.Render("~/Scripts/Common/Grid.js")*@
+    @Scripts.Render("~/Scripts/Common/GridAjax.js")
+    @Scripts.Render("~/Scripts/Device/DeviceSearch.js")
+    @Scripts.Render("~/Scripts/Common/Notifications.js")
+    @Scripts.Render("~/Scripts/Employees/EmployeesPresenter.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+    @Scripts.Render("~/Scripts/jquery.multiselect.min.js")
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/jquery.dataTables.js")
+}
+
+@Html.Partial("_Navigation", @Model.UserName)
+
+<div class="container-fluid" id="main-part">
+    <div class="row-fluid">
+        <div class="span2">
+            @Html.Partial("_SuccessNotification")
+            <div class="accordion-header">FILTERS</div>
+
+            @using (Html.BeginForm("Search", "Device", FormMethod.Post, new { enctype = "multipart/form-data", id = "formSearch" }))
+            {
+                @*@Html.HiddenFor(m => m.Pager.Page)
+                    @Html.HiddenFor(m => m.Pager.PageSize)
+                    @Html.HiddenFor(m => m.Sorter.Column)
+                    @Html.HiddenFor(m => m.Sorter.Direction)
+                    @Html.HiddenFor(m => m.Sorter.Expression)
+                    @Html.HiddenFor(m => m.ColumnSelector.UserGridColumnsIdsSer)
+                    @Html.HiddenFor(m => m.SearchFilter.TownID)
+                    @Html.HiddenFor(m => m.SearchFilter.TeamId)
+                    @Html.HiddenFor(m => m.SearchFilter.OsId)
+                    @Html.HiddenFor(m => m.SearchFilter.ManufacturerId)
+                    //@Html.HiddenFor(m => m.SearchFilter.ModelId)
+                    @Html.HiddenFor(m => m.SearchFilter.ScreenSizeId)
+                    @Html.HiddenFor(m => m.SearchFilter.ResolutionWidthId)
+                    @Html.HiddenFor(m => m.SearchFilter.ResolutionHeightId)
+                    @Html.HiddenFor(m => m.SearchFilter.ColorId)
+                    @Html.HiddenFor(m => m.SearchFilter.AvailableID)
+                    @Html.HiddenFor(m => m.SearchFilter.Name)
+                    @Html.HiddenFor(m => m.SearchFilter.Number)*@
+
+                <div id="accordion">
+                    <div class="accordion-header" data-labelfor="TownID">
+                        <span class="main">City</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.Towns)
+                {
+                    <div data-searchfield="TownID" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                    <div class="accordion-header" data-labelfor="OsId">
+                        <span class="main">OS</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.OS)
+                {
+                    <div data-searchfield="OsId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                    <div id="manufacturers-header" class="accordion-header disabled-filter" data-labelfor="ManufacturerId">
+                        <span class="main">Manufacturers</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div id="manufacturers">
+                        @{
+                foreach (SelectListItem element in Model.Manufacturers)
+                {
+                    <div data-searchfield="ManufacturerId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+
+                    <div id="models-header" class="accordion-header disabled-filter" data-labelfor="ModelId">
+                        <span class="main">Model</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div id="models">
+                        @{
+                foreach (SelectListItem element in Model.Models)
+                {
+                    <div data-searchfield="ModelId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+
+                    <div class="accordion-header" data-labelfor="TeamId">
+                        <span class="main">Team</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.Teams)
+                {
+                    <div data-searchfield="TeamId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                    <div class="accordion-header" data-labelfor="ScreenSizeId">
+                        <span class="main">Size</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.ScreenSizes)
+                {
+                    <div data-searchfield="ScreenSizeId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                    <div class="accordion-header" data-labelfor="ResolutionWidthId">
+                        <span class="main">Width (px)</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.ResolutionWidths)
+                {
+                    <div data-searchfield="ResolutionWidthId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                    <div class="accordion-header" data-labelfor="ResolutionHeightId">
+                        <span class="main">Height (px)</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.ResolutionHeights)
+                {
+                    <div data-searchfield="ResolutionHeightId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                    <div class="accordion-header" data-labelfor="ColorId">
+                        <span class="main">Color</span>
+                        <span class="pull-right">
+                            <span class="selected-left-side-filter"></span>
+                        </span>
+                    </div>
+                    <div>
+                        @{
+                foreach (SelectListItem element in Model.Colors)
+                {
+                    <div data-searchfield="ColorId" data-id=@element.Value class="accordion-collapsible-item searchOnClick">@element.Text</div>
+                }
+                        }
+                    </div>
+                </div>
+            }
+            <div class="text-center">
+                <button type="button" class="btn no-border-button" id="clear-filters">Clear filter</button>
+            </div>
+        </div>
+
+        <div class="span10">
+            @if (Model.Devices.Count() == 0)
+            {
+                @:No devices found.
+            }
+            else
+            {
+                <table id="divicesGidAjax"></table>
+            }
+        </div>
+
+    </div>
+</div>
+

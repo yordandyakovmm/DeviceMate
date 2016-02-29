@@ -1,0 +1,102 @@
+<div class="filters-wrapper">
+    <div class="all-filters-header"> 
+        <div id="device-tab" class="tab selected" ng-click="root.toggleFilterTab($event)">
+            Devices
+        </div>
+        <div id="accessory-tab" class="tab" ng-click="root.toggleFilterTab($event)">
+            Accessory
+        </div>
+    </div>
+    <div id="device-filters" class="tab-content">
+        <div class="filter">
+            <button class="filter-header" ng-click="root.toggleFilterNav($event)">
+                <span class="filter-header-label">City</span>
+                <span class="filter-header-selected-item">Sofia</span>
+            </button>
+            <nav class="filter-content ng-hide">
+                <ul>
+                    <li>
+                        Sofia
+                    </li>
+                    <li>
+                        Plovdiv
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="filter">
+            <button class="filter-header" ng-click="root.toggleFilterNav($event)">
+                <span class="filter-header-label">OS</span>
+                <span class="filter-header-selected-item">Android</span>
+            </button>
+            <nav class="filter-content ng-hide">
+                <ul>
+                    <li>
+                        Android
+                    </li>
+                    <li>
+                        iOS
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="filter">
+            <button class="filter-header disabled" ng-click="root.toggleFilterNav($event)">
+                <span class="filter-header-label">Manufacturer</span>
+                <span class="filter-header-selected-item">All</span>
+            </button>
+            <nav class="filter-content ng-hide">
+                <ul>
+                    <li>
+                        Samsung
+                    </li>
+                    <li>
+                        LG
+                    </li>
+                    <li>
+                        HTC
+                    </li>
+                </ul>
+            </nav>
+        </div>   
+    </div>
+    <div id="accessory-filters" class="tab-content ng-hide">
+        <div class="filter">
+            <button class="filter-header" ng-click="root.toggleFilterNav($event)">
+                <span class="filter-header-label">City</span>
+                <span class="filter-header-selected-item">Sofia</span>
+            </button>
+            <nav class="filter-content ng-hide">
+                <ul>
+                    <li>
+                        Sofia
+                    </li>
+                    <li>
+                        Plovdiv
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="filter">
+            <button class="filter-header" ng-click="root.toggleFilterNav($event)">
+                <span class="filter-header-label">Type</span>
+                <span class="filter-header-selected-item">Cable</span>
+            </button>
+            <nav class="filter-content ng-hide">
+                <ul>
+                    <li>
+                        Cable
+                    </li>
+                    <li>
+                        SIM
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="clear-filters">
+        <span>
+            Clear filters
+        </span>
+    </div>
+</div>

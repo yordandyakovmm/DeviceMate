@@ -1,0 +1,50 @@
+﻿@using System.Web.Optimization
+@using Microsoft.Owin.Security
+
+@{
+    ViewBag.Title = "DeviceMate - Login";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/openid")*@
+    @Scripts.Render("~/Scripts/Common/LogOn.js")
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-block alert-error fade in">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4 class="alert-heading">Oh snap! You got an error!</h4>
+        <p>@ViewBag.ErrorMessage</p>
+    </div>
+}
+
+<style type="text/css">
+    /*
+     * Remove content-holder only for this page:
+     */
+    .content-holder {
+      display: none;
+    }
+</style>
+
+<div class="login-holder hero-unit">
+    <div class="login-container">
+        <div class="logo-wrapper">
+            <h1><a href="/"><span>DeviceMate</span></a></h1>
+        </div>
+        <p><span class="quote">When a team outgrows individual performance and learns team confidence, excellence becomes a reality.</span><br /><em>-- GodMother</em></p>
+        <section role="dialog" class="login">
+            <div id="rememberMeWrapper" class="rememberme-holder">
+                @Html.CheckBox("RememberMe", true, new { id = "chkRememberMe" })
+                <label id="rememberMeLabel" for="chkRememberMe">Remember Me</label>
+            </div>
+            @{
+                var authenticationManager = Context.GetOwinContext().Authentication;
+                AuthenticationDescription googleProvider = authenticationManager.GetExternalAuthenticationTypes().FirstOrDefault();
+                <a class="button" id="lnkLogIn" href="/Account/ExternalLogin?provider=@googleProvider.AuthenticationType&persistent=true">
+                  <i class="icon icon-gplus"></i> <span class="button-label">Login with @googleProvider.Caption</span>
+                </a>
+            }
+        </section>
+    </div> <!-- END of .login-container -->
+</div> <!-- END of .login-holder -->

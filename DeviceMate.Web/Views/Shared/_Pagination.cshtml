@@ -1,0 +1,34 @@
+﻿@model DeviceMate.Web.Models.Pager
+
+<div class="pagination pull-right">
+    @for (var pageNumber = Model.FirstPageNumber; pageNumber <= Model.LastPageNumber; pageNumber++)
+{
+    if (pageNumber == Model.Page)
+    {
+        var From = 1 + (Model.Page - 1) * Model.PageSize;
+        var To = Model.Page * Model.PageSize;
+
+        <span class="add-margin-right"><span class="selected-left-side-filter">@From - @To</span> of XXX Devices</span>
+    }
+}
+
+    <ul class="add-margin-right">
+        @if (Model.HasPreviousPage)
+        {
+            <li><a href="#@Model.PreviousPage">&lt;</a></li>
+        }
+        else
+        {
+            <li class="disabled"><span>&lt;</span></li>
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li><a href="#@Model.NextPage">&gt;</a></li>
+        }
+        else
+        {
+            <li class="disabled"><span>&gt;</span></li>
+        }
+    </ul>
+</div>

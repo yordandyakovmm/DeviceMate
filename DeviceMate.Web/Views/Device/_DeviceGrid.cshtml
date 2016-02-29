@@ -1,0 +1,110 @@
+﻿@model DeviceMate.Web.Models.DeviceModel
+@Html.Partial("_GridHeader", Model)
+
+<div class="table-responsive" style="overflow: auto">
+    <table id="search-table" class="table"
+           data-employees-default-picture="@Url.Content("/Content/images/mentormate-logo.png")"
+           data-employees-extra-data-url="@Url.Action("Index", "Employee")">
+        <tbody>
+            @foreach (var dev in Model.Devices)
+            {
+                string holdDate = dev.Hold.HoldDate != null ? dev.Hold.HoldDate.ToShortDateString() : "";
+                <tr data-itemid="@dev.Id" class=@(dev.Hold.IsBusy == false ? "red-color" : "")>
+                    <td>
+                        <span class=@(dev.Hold.IsBusy? "red-color-busy" : "green-color-free")>
+                            @dev.Number
+                        </span>
+                    </td>
+                    <td>
+                        @if (dev.Model != null && dev.Model.Manufacturer != null && dev.Model.Manufacturer.OSs != null)
+                        {   
+                            if (dev.Model.Manufacturer.OSs.Name.Trim().Equals("Android"))
+                            {
+                                <img src="/Content/images/img-45-android.png">
+                            }
+                            else if (dev.Model.Manufacturer.OSs.Name.Trim().Equals("Iphone OS"))
+                            {
+                                <img src="/Content/images/img-45-ios.png">
+                            }
+                            else
+                            { 
+                                <span>DEF</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>NO OS</span>
+                        }
+                    </td>
+                    <td>
+                        @if (dev.DeviceType.Name.Trim().Equals("phone"))
+                        {
+                            <img src="/Content/images/img-45-phone.png">
+                        }
+                        else if (dev.DeviceType.Name.Trim().Equals("tablet"))
+                        {
+                            <img src="/Content/images/img-45-tablet.png">
+                        }
+                        else
+                        {
+                            <span>DEF</span>
+                        }
+                    </td>
+                    <td>
+                        @dev.Name
+                        <br />
+                        @dev.Model.Name
+                        <br/>
+                        @dev.DeviceType.Name
+                    </td>
+                    <td class="text-center">
+                        @(dev.Model != null && dev.Model.Manufacturer != null && dev.Model.Manufacturer.OSs != null && dev.OsVersion != null ? dev.Model.Manufacturer.OSs.Name : string.Empty)
+                        <br />
+                        @(dev.Model != null && dev.Model.Manufacturer != null && dev.Model.Manufacturer.OSs != null && dev.OsVersion != null ? dev.OsVersion : string.Empty)
+                    </td>
+                    <td class="text-center">
+                        @(dev.Resolution != null && dev.Resolution.ResolutionWidthOption != null && dev.Resolution.ResolutionHeightOption != null ?
+                    dev.Resolution.ResolutionWidthOption.Width.ToString() + 'X' + dev.Resolution.ResolutionHeightOption.Height.ToString() : string.Empty)
+                        <br />
+                        @(dev.ScreenSize != null ? dev.ScreenSize.Size.ToString("0.##") + '"' : string.Empty)
+                    </td>
+                    <td>@(dev.Color != null ? dev.Color.Name : "")</td>
+                    <td class="text-center">
+                        <div class="selected-left-side-filter">
+                            @((dev.Hold != null && dev.Hold.Town != null) ? dev.Hold.Town.Name : "")
+                        </div>
+                        <img src="/Content/images/icon-45x30-location.png">
+                    </td>
+                    <td class="td-email" title="Information Not Available">
+                        <div class="holder-photo"></div>
+                        <div class="holder-team">@((dev.Hold != null && dev.Hold.Team != null) ? dev.Hold.Team.Name : "")</div>
+                        <div class="email-text selected-left-side-filter">@dev.Hold.Email</div>
+                        <a class="holder-skype"><img src="/Content/images/skype-icon.gif"></a>
+                        <a class="holder-location" target="_blank"><img src="/Content/images/location.jpg"></a>
+                        <img class="loading" src="~/Content/images/loading.gif" />
+                    </td>
+                    <td class="text-center">
+                        <div>
+                            @holdDate
+                        </div>
+                        <img src="/Content/images/icon-45x30-clock.png">
+                    </td>
+                    <td>
+                        @if (dev.Hold.Email.ToLower() == Model.UserName.ToLower())
+                        {
+                            <a href="@Url.Action("IsAvailable", "Device", new {id = dev.Hold.Id})" class="btn">@(dev.Hold.IsBusy == true ? "free" : "busy")</a>
+                        }
+
+                        <a href="@Url.Action("Submit", "Device", new {Id = dev.Id})" class="btn">submit</a>
+
+                        @if (Model.IsAdmin == true)
+                        {
+                            <a href="@Url.Action("AddEdit", "Device", new {Id = dev.Id})" class="btn">edit</a>
+                            <button data-url="@Url.Action("Delete", "Device", new {Id = dev.Id})" data-itemid="@dev.Id" class="btn delete">delete</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

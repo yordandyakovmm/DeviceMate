@@ -1,0 +1,137 @@
+﻿@model DeviceMate.Web.Models.AccessoryModel
+@{
+    bool isNumberColumnVisible = Model.ColumnSelector.IsColumnVisible("#");
+    bool isTypeColumnVisible = Model.ColumnSelector.IsColumnVisible("Type");
+    bool isDescriptionColumnVisible = Model.ColumnSelector.IsColumnVisible("Description");
+    bool isAdditionalInfoColumnVisible = Model.ColumnSelector.IsColumnVisible("Additional Info");
+    bool isTeamColumnVisible = Model.ColumnSelector.IsColumnVisible("Team");
+    bool isTownColumnVisible = Model.ColumnSelector.IsColumnVisible("Town");
+    bool isTargetOsColumnVisible = Model.ColumnSelector.IsColumnVisible("Target OS");
+    bool isColorColumnVisible = Model.ColumnSelector.IsColumnVisible("Color");
+    bool isHolderColumnVisible = Model.ColumnSelector.IsColumnVisible("Holder");
+    bool isHoldTimeColumnVisible = Model.ColumnSelector.IsColumnVisible("Hold Time");
+    bool isActionsColumnVisible = Model.ColumnSelector.IsColumnVisible("Actions");
+}
+<h4> Count: @Model.Accessories.Count()</h4>
+@Html.Partial("_GridHeader", Model)
+<div class="table-responsive" style="overflow: auto">
+    <table id="search-table" class="table table-striped table-bordered"
+           data-employees-default-picture="@Url.Content("/Content/images/mentormate-logo.png")"
+           data-employees-extra-data-url="@Url.Action("Index", "Employee")">
+        <thead>
+            <tr>
+                @if (isNumberColumnVisible)
+                {
+                    <th data-sort-column="Number" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "Number" } })>#<sup></sup></th>
+                }
+                @if (isTypeColumnVisible)
+                {
+                    <th data-sort-column="AccessoryType.Name" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "AccessoryType.Name" } })>Type<sup></sup></th>
+                }
+                @if (isDescriptionColumnVisible)
+                {
+                    <th data-sort-column="AccessoryDescription.Description" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "AccessoryDescription.Description" } })>Description<sup></sup></th>
+                }
+                @if (isAdditionalInfoColumnVisible)
+                {
+                    <th data-sort-column="SerialNumber" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "SerialNumber" } })>Additional<br />Info<sup></sup></th>
+                }
+                @if (isTeamColumnVisible)
+                {
+                    <th data-sort-column="Hold.Team.Name" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "Hold.Team.Name" } })>Team<sup></sup></th>
+                }
+                @if (isTownColumnVisible)
+                {
+                    <th data-sort-column="Hold.Town.Name" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "Hold.Town.Name" } })>Town<sup></sup></th>
+                }
+                @if (isTargetOsColumnVisible)
+                {
+                    <th data-sort-column="OSs.Name" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "OSs.Name" } })>Target<br />OS<sup></sup></th>
+                }
+                @if (isColorColumnVisible)
+                {
+                    <th data-sort-column="Color.Name" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "Color.Name" } })>Color<sup></sup></th>
+                }
+                @if (isHolderColumnVisible)
+                {
+                    <th data-sort-column="Hold.Email" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "Hold.Email" } })>Holder<sup></sup></th>
+                }
+                @if (isHoldTimeColumnVisible)
+                {
+                    <th data-sort-column="Hold.HoldDate" @Html.Partial("_SortBackgroundImageStyle", Model.Sorter, new ViewDataDictionary { { "Column", "Hold.HoldDate" } })>Hold<br />Time<sup></sup></th>
+                }
+                @if (isActionsColumnVisible)
+                {
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var accessory in Model.Accessories)
+            {
+                <tr data-itemid="@accessory.Id">
+                    @if (isNumberColumnVisible)
+                    {
+                        <td>@accessory.Number</td>
+                    }
+                    @if (isTypeColumnVisible)
+                    {
+                        <td>@accessory.AccessoryType.Name</td>
+                    }
+                    @if (isDescriptionColumnVisible)
+                    {
+                        <td>@accessory.AccessoryDescription.Description</td>
+                    }
+                    @if (isAdditionalInfoColumnVisible)
+                    {
+                        <td>@accessory.SerialNumber</td>
+                    }
+                    @if (isTeamColumnVisible)
+                    {
+                        <td>@accessory.Hold.Team.Name</td>
+                    }
+                    @if (isTownColumnVisible)
+                    {
+                        <td>@(accessory.Hold.Town != null ? accessory.Hold.Town.Name : string.Empty)</td>
+                    }
+                    @if (isTargetOsColumnVisible)
+                    {
+                        <td>@(accessory.OSs != null ? accessory.OSs.Name : string.Empty)</td>
+                    }
+                    @if (isColorColumnVisible)
+                    {
+                        <td>@(accessory.Color != null ? accessory.Color.Name : string.Empty)</td>
+                    }
+                    @if (isHolderColumnVisible)
+                    {
+                        <td class="td-email" title="Information Not Available">
+                            <span class="email-text">@accessory.Hold.Email</span>
+                            <img class="loading" src="~/Content/images/loading.gif" />
+                        </td>
+                    }
+                    @if (isHoldTimeColumnVisible)
+                    {
+                        <td>@accessory.Hold.HoldDate.ToString("G")</td>
+                    }
+                    @if (isActionsColumnVisible)
+                    {
+                        <td>
+                            <a href="@Url.Action("Submit", "Accessory", new {Id = @accessory.Hold.Id})" class="btn">submit</a>
+
+                            @if (Model.IsAdmin == true)
+                            {
+                                <a href="@Url.Action("AddEdit", "Accessory", new {Id = @accessory.Id})" class="btn">edit</a>
+
+                                <button data-url="@Url.Action("Delete", "Accessory", new {Id = @accessory.Id})"
+                                        data-itemid="@accessory.Id" class="btn delete">
+                                    delete
+                                </button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Html.Partial("_Pagination", Model.Pager)

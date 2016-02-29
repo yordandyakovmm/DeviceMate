@@ -1,0 +1,42 @@
+﻿@model DeviceMate.Web.Models.ISortingPaginationColumnSelection
+           
+<div class="container-fluid" style="padding: 0">
+    <div class="row-fluid">
+        <fieldset class="span3">
+            <button id="show-all" type="button" class="no-border-button top-filter-button">Show All</button>
+            <button id="show-available" type="button" class="no-border-button top-filter-button">Available</button>
+            <button id="show-not-available" type="button" class="no-border-button top-filter-button">Not Available</button>
+        </fieldset>
+        <fieldset class="span5 pull-right">
+            <div class="pull-right">
+                <img id="sort-direction" src="/Content/images/icon-asc.png">
+            </div>
+            <div class="pull-right">
+                <span class="add-margin-right">Sort By</span>
+                <select id="sort-by">
+                    <option value="">Choose</option>
+                    <option value="Model.Name">Model</option>
+                    <option value="Name">Name</option>
+                    <option value="DeviceType.Name">Type</option>
+                    <option value="Model.Manufacturer.OSs.Name">OS</option>
+                    <option value="Hold.Team.Name">Team</option>
+                </select>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row-fluid">
+        <table id="input-search-table">
+            <tr>
+                <td id="img-cell">
+                    <img id="search-icon" src="/Content/images/icon-45-search.png">
+                    <div class="vertical-line" />
+                </td>
+                <td id="empty-space-cell"></td>
+                <td id="input-cell">
+                    <input id="search-text" type="text" name="searchText" placeholder="TYPE YOUR SEARCH HERE">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

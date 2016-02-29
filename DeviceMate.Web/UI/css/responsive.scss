@@ -1,0 +1,89 @@
+@media all and (max-width: 1695px) {
+  .grid-holder {
+    .device-color {
+      display: none;
+    }
+  }
+}
+
+@media all and (max-width: 1620px) {
+  .grid-holder {
+    .item-type {
+      display: none;
+    }
+  }
+}
+
+@media all and (max-width: 1560px) {
+  .grid-holder {
+    .platform {
+      display: none;
+    }
+  }
+}
+
+@media all and (max-width: 1500px) {
+  .grid-holder {
+    .device-screen {
+      display: none;
+    }
+  }
+}
+
+@media all and (max-width: 1420px) {
+  .filters-wrapper {
+    width: 180px;
+
+    .all-filters-header .tab .label-text {
+      display: none;
+    }
+  }
+
+  .content-wrapper {
+    margin-left: 180px;
+
+    .head-container {
+      padding-left: 195px;
+    }
+
+    .grid-holder {
+      .item-holder {
+        .device-identifier {
+          padding-top: 10px;
+          width: 75px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1320px) {
+  .content-wrapper .grid-holder {
+
+    .item-holder {
+      .item-details {
+        width: 240px;
+
+        .item-manufacturer {
+          font-size: 14px;
+        }
+
+        .item-model,
+        .item-info {
+          font-size: 12px;
+        }
+      }
+
+      .current-holder-info {
+
+        .current-holder-team {
+          font-size: 14px;
+        }
+        .current-holder-email {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

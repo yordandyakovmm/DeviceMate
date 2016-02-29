@@ -1,0 +1,52 @@
+<div class="item-history-holder">
+  <div class="history-holder">
+    <h2 class="title">
+      <span class="device-identifier {{vm.item.isBusyClass}}">{{vm.item.name}}</span>
+      History
+    </h2>
+
+    <div class="history-list-holder">
+      <div class="item-holder" ng-repeat="item in vm.itemHistory">
+        <dd class="holder-contacts">
+          <div class="profile-images-container">
+            <div class="profile-pic-holder">
+              <div class="profile-pic-positioner">
+                <img ng-src="{{item.Hold.ImagePath}}" width="48" class="current-holder-picture" title="{{item.Hold.FullName}}">
+              </div>
+            </div>
+          </div>
+
+          <a class="link-skype" ng-href="skype:{{item.contactSkype}}?chat" ng-click="stopPropagation($event);">
+            <img src="UI/images/icon-skype.png" width="20" class="holder-skype">
+          </a>
+        </dd>
+
+        <dd class="holder-info">
+          <span class="holder-team">{{item.Hold.Team.Name}}</span>
+          <a href="#" class="holder-eamil">{{item.Hold.Email}}</a>
+        </dd>
+
+        <dd class="item-location">
+          <a ng-click="stopPropagation($event)" ng-href="/Employee/Location/?email={{item.email}}">
+            <span class="location-name">{{item.Hold.Location.Name}}</span>
+            <i class="location"></i>
+          </a>
+        </dd>
+
+        <dd class="date-info">
+          <span class="date-year">{{item.Accessory.DateTaken | date: 'yyyy'}}</span>
+          <span class="date-day">{{item.Accessory.DateTaken | date: 'MMM dd'}}</span>
+        </dd>
+      </div>
+
+      <p class="text-center text-muted h4" ng-show="vm.isHistoryEmpty">Nothing to see here</p>
+    </div>
+
+    <div class="history-buttons">
+      <button type="button" class="btn btn-close" ng-click="vm.hideHistory()">
+        <i class="dm-glyph-close"></i>
+        <span class="btm-label">Close</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,218 @@
+﻿@using DeviceMate.Web.Models;
+@model AccessoryModel
+@{
+    if (Model.Accessory.Id.HasValue)
+    {
+        ViewBag.Title = "Edit accessory";
+    }
+    else
+    {        
+        ViewBag.Title = "Add accessory";
+    }
+}
+
+<div  id="main-part">
+    @Html.Partial("_SuccessNotification")
+    <div class="hero-unit">
+        @if (Model.Accessory.Id.HasValue)
+        {
+            <div class="Add-edit-page-header">
+                <div class="AddEdit-head">
+                    <i class="dm-glyph-cog nav-glyph"></i>
+                    Manage
+                </div>
+                <span class="add-header">EDIT ACCESSORY</span>
+            </div>
+        }
+        else
+        {
+            <div class="Add-edit-page-header">
+                <div class="AddEdit-head">
+                    <i class="dm-glyph-cog nav-glyph"></i>
+                    Manage
+                </div>
+                <span class="add-header">ADD NEW ACCESSORY</span>
+            </div>
+        }
+        <div class="add-device-block">
+            @using (Html.BeginForm("AddEdit", "Accessory", FormMethod.Post, new { enctype = "multipart/form-data", id = "formDevice" }))
+            {
+                @Html.HiddenFor(m => m.Accessory.Id)
+    <div class="gray-bar">
+        <div class="AddEdit-bar">
+            <i class="icon-sitemap nav-glyph"></i>
+            General
+        </div>
+        <fieldset class="span3">
+            <span class="add-header2">GENERAL INFORMATION</span>
+            <p class="add-header-tip">Accesory Number and info</p>
+        </fieldset>
+        <fieldset class="span3">
+            <span class="add-header2">ADDITIONAL INFORMATION</span>
+            <p class="add-header-tip">type,color</p>
+        </fieldset>
+        <fieldset class="span3">
+            <span class="add-header2">TOWN</span>
+            <p class="add-header-tip"></p>
+        </fieldset>
+
+    </div>
+                <div class="row nopadding">
+                    <fieldset class="span3">
+                        <label>Accessory Number</label>
+                        @Html.TextBoxFor(m => m.Accessory.Number, new { maxlength = 20 })
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Accessory.Number)
+                            @Html.ValidationMessage("NameUniqueness")
+                        </span>
+                        <label>Additional Info</label>
+                        @Html.TextBoxFor(m => m.Accessory.SerialNumber)
+                    </fieldset>
+                  
+                    <fieldset class="span3">
+                        <label>Accessory types</label>
+                        <button type="button" id="openAccessoryTypePopup" class="btn add-remove-btn">Add</button>
+                        <button type="button" id="deleteAccessoryType" class="btn add-remove-btn" data-url="@Url.Action("DeleteAccessoryType", "Accessory")">Delete</button><br />
+                        @Html.DropDownListFor(m => m.Accessory.AccessoryTypeId, Model.AccessoryTypes, new { @size = 5, @data_url = @Url.Action("GetAccessoryTypes", "Accessory") })
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.Accessory.AccessoryTypeId)
+                        </span>
+                        
+                    </fieldset>
+                    <fieldset class="span3">
+                        <label>Town</label>
+                        <br>
+                        @Html.DropDownListFor(m => m.TownId, Model.Towns, new { @size = 5 })
+                        <span class="help-inline">
+                            @Html.ValidationMessageFor(m => m.TownId)
+                        </span>
+                    </fieldset>
+
+                </div>
+
+    <div class="gray-bar">
+        <div class="AddEdit-bar">
+            <i class="dm-glyph-os nav-glyph"></i>
+            OS
+        </div>
+        <fieldset class="span3">
+            <i class="dm-glyph-arrowright nav-glyph"></i>
+            <span class="add-header2">OS</span>
+            <p class="add-header-tip">Accesory OS</p>
+        </fieldset>
+        <fieldset class="span3">
+            <i class="dm-glyph-arrowright nav-glyph"></i>
+            <span class="add-header2">ADDITIONAL INFORMATION</span>
+            <p class="add-header-tip">Description</p>
+        </fieldset>
+        <fieldset class="span3">
+            <i class="dm-glyph-arrowright nav-glyph"></i>
+            <span class="add-header2">COLOR</span>
+            <p class="add-header-tip">Accessory color</p>
+        </fieldset>
+
+     
+
+    </div>
+    <div class="row nopadding">
+        <fieldset class="span3">
+            <label>Device OS</label>
+            <br>
+            @Html.DropDownListFor(m => m.Accessory.OsId, Model.OSs, new { @size = 5 })
+            <span class="help-inline">
+                @Html.ValidationMessageFor(m => m.Accessory.OsId)
+            </span>
+        </fieldset>
+        <fieldset class="span3">
+            <label>Accessory Descriptions</label>
+            <button type="button" id="openAccessoryDescriptionPopup" class="btn add-remove-btn">Add</button>
+            <button type="button" id="deleteAccessoryDescription" class="btn add-remove-btn" data-url="@Url.Action("DeleteAccessoryDescription", "Accessory")">Delete</button><br />
+            @Html.DropDownListFor(m => m.Accessory.AccessoryDescriptionId, Model.AccessoryDescriptions, new { @size = 5, @data_url = @Url.Action("GetAccessoryDescriptions", "Accessory") })
+            <span class="help-inline">
+                @Html.ValidationMessageFor(m => m.Accessory.AccessoryDescriptionId)
+            </span>
+        </fieldset>
+        <fieldset class="span3">
+            <label>Color</label>
+            <br>
+            @Html.DropDownListFor(m => m.Accessory.ColorId, Model.Colors, new { @size = 5 })
+            <span class="help-inline">
+                @Html.ValidationMessageFor(m => m.Accessory.ColorId)
+            </span>
+        </fieldset>
+</div>
+    <div class="row nopadding">
+        
+        <fieldset class="span3">
+           
+        </fieldset>
+    </div>
+    <div class="row nopadding">
+       
+    </div>
+  
+    <div class="row nopadding">
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btnSave">
+                @if (Model.Accessory.Id.HasValue)
+                {
+                    @:Edit
+                            }
+                else
+                {
+                    @:Add
+                            }
+            </button>
+        </div>
+    </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="addAccessoryType" style="display: none;" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new type</legend>
+            <label for="accessoryTypeName">Name</label>
+            <input type="text" id="accessoryTypeName" name="name" /><br />
+            <button type="button" id="addAccessoryType-button" class="btn btn-primary" data-url="@Url.Action("AddAcccessoryType", "Accessory")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+
+<div id="addAccessoryDescription" style="display: none;" class="popup">
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Add new description</legend>
+            <label for="accessoryDescription">Description</label>
+            <input type="text" id="accessoryDescription" name="description" /><br />
+            <button type="button" id="addAccessoryDescription-button" class="btn btn-primary" data-url="@Url.Action("AddAcccessoryDescription", "Accessory")">Add</button>
+            <span class="close">x</span>
+        </fieldset>
+    </form>
+</div>
+
+<div id="errorPopup" style="display: none;" class="popup">
+    <p></p>
+    <span class="close">x</span>
+</div>
+@section scripts {
+
+    @Scripts.Render("~/Scripts/Common/Select.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/UI/vendor")
+    @Scripts.Render("~/UI/js/app.js")
+    @Scripts.Render("~/UI/js/directives/dropdownDirective.js")
+    @Scripts.Render("~/UI/js/controllers/RootCtrl.js")
+    @Scripts.Render("~/UI/js/services/userModel.js")
+    @Scripts.Render("~/UI/js/services/RestSvc.js")
+    @Scripts.Render("~/UI/js/services/userSvc.js")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/Common/Lists.js")
+    @Scripts.Render("~/Scripts/Accessory/AddEdit.js")
+    @Scripts.Render("~/Scripts/Common/Select.js")
+
+}

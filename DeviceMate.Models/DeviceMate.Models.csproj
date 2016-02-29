@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9BBB8BE3-1C1F-4CBD-8E5D-FF3895B339C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DeviceMate.Models</RootNamespace>
+    <AssemblyName>DeviceMate.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Demo\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Abstract\IdNameModel.cs" />
+    <Compile Include="Domain\Abstract\PagedItems.cs" />
+    <Compile Include="Domain\Abstract\PagerFilter.cs" />
+    <Compile Include="Domain\AccessoryFilter.cs" />
+    <Compile Include="Domain\AccessoryHistoryProxy.cs" />
+    <Compile Include="Domain\AccessoryHistoryProxyList.cs" />
+    <Compile Include="Domain\FilterOptions.cs" />
+    <Compile Include="Domain\HistoryFilter.cs" />
+    <Compile Include="Domain\Interfaces\IResponseMessage.cs" />
+    <Compile Include="Domain\ResponseMessage.cs" />
+    <Compile Include="Domain\AccessoryProxyList.cs" />
+    <Compile Include="Domain\AccessoryProxy.cs" />
+    <Compile Include="Domain\AccessoryDescriptionProxy.cs" />
+    <Compile Include="Domain\AccessoryTypeProxy.cs" />
+    <Compile Include="Domain\DeviceHistoryProxy.cs" />
+    <Compile Include="Domain\DeviceHistoryProxyList.cs" />
+    <Compile Include="Domain\DeviceProxyList.cs" />
+    <Compile Include="Domain\LocationProxy.cs" />
+    <Compile Include="Domain\DeviceFilter.cs" />
+    <Compile Include="Domain\Platform.cs" />
+    <Compile Include="Domain\ResolutionDimention.cs" />
+    <Compile Include="Domain\ColorProxy.cs" />
+    <Compile Include="Domain\DeviceProxy.cs" />
+    <Compile Include="Domain\HoldProxy.cs" />
+    <Compile Include="Domain\ManufacturerProxy.cs" />
+    <Compile Include="Domain\ModelProxy.cs" />
+    <Compile Include="Domain\ResolutionProxy.cs" />
+    <Compile Include="Domain\DeviceTypeProxy.cs" />
+    <Compile Include="Domain\ScreenSizeProxy.cs" />
+    <Compile Include="Domain\TeamProxy.cs" />
+    <Compile Include="Domain\TeamProxyList.cs" />
+    <Compile Include="Domain\UserProxy.cs" />
+    <Compile Include="Domain\UserProxyList.cs" />
+    <Compile Include="Domain\TeamFilter.cs" />
+    <Compile Include="Domain\UserFilter.cs" />
+    <Compile Include="Entities\Accessory.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\AccessoryDescription.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\AccessoryHoldsHistory.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\AccessoryType.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Color.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Device.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DeviceHoldsHistory.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DeviceMate.Context.cs">
+      <DependentUpon>DeviceMate.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Entities\DeviceMate.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Entities\DeviceMate.Designer.cs">
+      <DependentUpon>DeviceMate.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Entities\DeviceType.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Grid.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\GridColumn.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Hold.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Manufacturer.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Model.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OSs.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Resolution.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ResolutionHeightOption.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ResolutionWidthOption.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Role.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ScreenSize.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Status.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Team.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Town.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\UsersGridColumn.cs">
+      <DependentUpon>DeviceMate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\enLoginStatus.cs" />
+    <Compile Include="Enums\enSortColumn.cs" />
+    <Compile Include="Enums\enFilterType.cs" />
+    <Compile Include="Enums\enSortOrder.cs" />
+    <Compile Include="Enums\enTown.cs" />
+    <Compile Include="Enums\enUserRole.cs" />
+    <Compile Include="Enums\enUserStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Entities\DeviceMate.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DeviceMate.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Entities\DeviceMate.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DeviceMate.edmx</DependentUpon>
+      <LastGenOutput>DeviceMate.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Entities\DeviceMate.edmx.diagram">
+      <DependentUpon>DeviceMate.edmx</DependentUpon>
+    </None>
+    <None Include="Entities\DeviceMate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DeviceMate.edmx</DependentUpon>
+      <LastGenOutput>DeviceMate.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entities\DeviceMate.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

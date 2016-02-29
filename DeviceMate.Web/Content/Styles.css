@@ -1,0 +1,402 @@
+﻿.popup {
+    padding:20px;
+    width:230px;
+    position:absolute;
+    top:200px;
+    left:500px;
+    background-color:#6cb5da;
+    z-index: 100;
+}
+.close {
+    position:absolute;
+    top:2px;
+    right:5px;
+}
+#mask {
+    display: none;
+    background: #000; 
+    position: fixed; left: 0; top: 0; 
+    z-index: 10;
+    width: 100%; height: 100%;
+    opacity: 0.6;
+    z-index: 99;
+}
+
+#rememberMeLabel {
+    display:inline !important; 
+    position: relative;
+    top: 2px;
+}
+
+#rememberMeWrapper {
+    margin-top: -8px;
+}
+
+#successNotification {
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    display:inline-block;
+    background-image: url('images/success.png');
+}
+
+.ui-tooltip {
+    font-size: 15px;
+    display:inline-block; 
+    z-index:2147483638;          
+}
+
+.tooltip-pic {
+    float:left;
+    width:120px;
+    border-radius: 3px;
+}
+
+.tooptip-info {
+    float:right;
+    margin: 20px 5px 5px 15px;
+    text-align:center;
+}
+
+.tooltip-info-item {
+    margin-bottom: 5px;
+}
+
+.ui-tooltip, .arrow:after {
+    background: #FFFCCF;
+    border: 1px solid black;
+}
+
+.ui-tooltip {
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 7px black;
+}
+
+.arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+}
+
+.arrow.top {
+    top: -16px;
+    bottom: auto;
+}
+
+.arrow.left {
+    left: 20%;
+}
+
+.arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+}
+
+.arrow.top:after {
+    bottom: -20px;
+    top: auto;
+}
+
+.loading {
+     width:15px;
+}
+
+.skype-chat {
+    position: absolute;
+    display: inline-block;
+    margin-left: 4px;
+    margin-top: -5px;
+}
+
+th, td {
+    vertical-align: middle  !important;
+}
+
+#search-table {
+    /*commented by Eli*/
+    /*width: auto !important;*/
+}
+
+#search-table th[data-sort-column] {
+    cursor: pointer;
+    /* min-width: 100px; */
+    font-size: 12px;
+}
+
+#search-table td {
+    /* min-width: 100px; */
+}
+
+#accessoryGrid {
+    width: auto !important;
+}
+
+#accessoryGrid  th[data-sort-column] {
+    /* min-width: 100px; */
+    font-size: 12px;
+}
+
+#accessoryGrid td {
+    /* min-width: 100px; */
+}
+
+.hint {
+    font-style: italic;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.location > a {
+    text-decoration: none;
+}
+
+#location-not-found-error {
+    padding: 20px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.add-remove-btn {
+    margin-bottom: 5px;
+}
+
+/*-----Eli's CSS-------*/
+#main-part {
+    background-color: #f9f9f9;
+    margin-top: 75px;
+    padding-top: 15px;
+}
+
+.accordion-header {
+    border-bottom: 1px solid #DCDCDC;
+    height: 45px;
+    line-height: 45px;
+}
+
+.accordion-collapsible-item {
+    background-color: white;
+    border-bottom: 1px solid #DCDCDC;
+    height: 30px;
+    line-height: 30px;
+}
+
+/*this rule removes the active outline from jquery ui accordion*/
+#accordion .ui-state-focus{
+    outline: none;
+}
+
+.no-border-button {
+    border: none;
+    background: none;
+}
+
+#clear-filters {
+    color: red;
+}
+
+#sort-direction {
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid #DCDCDC;
+    border-radius: 5px;
+}
+
+.top-filter-button{
+    width: 95px;
+    height: 30px;
+    margin-right: 15px;
+}
+
+#show-all{
+    color: #50abd9;
+    outline:none;
+}
+
+#show-available{
+    color: green;
+    outline:none;
+}
+
+#show-not-available{
+    color: red;
+    outline:none;
+}
+
+.selected-top-filter {
+    border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    border: none;
+}
+
+#show-all.selected-top-filter {
+    color: white;
+    background-color: #50abd9;
+}
+
+#show-available.selected-top-filter {
+    color: white;
+    background-color: green;
+}
+
+#show-not-available.selected-top-filter {
+    color: white;
+    background-color: red;
+}
+
+.disabled-filter {
+    color: #DCDCDC;
+}
+
+.selected-left-side-filter {
+    color: #50abd9;
+}
+
+.pagination {
+    /*todo: try to remove overwriting of bootstrap css*/
+    margin: 0px !important;
+    display: flex;
+    align-items: center;
+}
+
+#sort-by {
+    margin-bottom: 0px;
+    width: 90px;
+}
+
+#sort-direction{
+    min-height: 30px;
+}
+
+.add-margin-right{
+    margin-right: 15px;
+}
+
+#search-text{
+    height:75px;
+    width:100%;
+    margin-bottom: 0px;
+    padding: 0px 0px;
+    background-color: #50abd9;
+    border: none;
+    color: white;
+}
+
+#search-text::-webkit-input-placeholder {
+    color: white;
+}
+#search-text:-moz-placeholder {
+    /* FF 4-18 */
+    color: white;
+}
+#search-text::-moz-placeholder {
+    /* FF 19+ */
+    color: white;
+}
+
+#search-icon {
+    background: #50abd9;
+}
+
+div.vertical-line{
+  width: 1px;
+  height: 45px;
+  background-color: white;
+  float: right;
+}
+#input-search-table{
+    width:100%;
+    background-color: #50abd9;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+#img-cell{
+    width:75px;
+    text-align: center;
+}
+
+#empty-space-cell{
+    width: 15px;
+}
+
+#divicesGidAjax{
+    background-color: white;
+}
+
+#divicesGidAjax td{
+    border-top: none;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.red-color-busy{
+    color: red;
+}
+
+.green-color-free {
+    color: green;
+}
+
+.holder-photo{
+    width: 45px;
+	height: 45px;
+    float: left;
+    margin-right: 15px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+}
+
+.text-center{
+    text-align:center !important;
+}
+
+/*header css*/
+#top-bar{
+    background-color: black;
+    padding-bottom:15px;
+    padding-top: 15px;
+}
+
+/*overwrites the bootstrap rule .navbar .nav > li > a*/
+.top-menu-icon{
+    padding: 0px 0px 0px 0px !important;
+}
+
+#top-menu-navigation > li{
+    margin-left: 15px;
+}
+
+#top-menu-navigation > li > a:hover {
+    color: orange;
+}
+
+#dropdownMenu1 {
+    color: white;
+    background-color: black;
+    border: none;
+    /*overwrites bootstrap*/
+    outline: none;
+}

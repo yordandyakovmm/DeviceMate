@@ -1,0 +1,11 @@
+<form ng-submit="closeThisDialog({ newFilter: vm.filter })">
+    <h4>Add New {{ vm.title }} Filter</h4>
+    <div class="form-group">
+      <label for="filterName">Name</label>
+      <input id="filterName" class="form-control input-sm" type="text" ng-model="vm.filter">
+    </div>
+    <p class="text-right">
+      <button type="submit" class="btn btn-custom">Save</button>
+      <button type="button" class="btn btn-default" ng-click="closeThisDialog({ newFilter: null })">Close</button>
+    </p>
+</form>
